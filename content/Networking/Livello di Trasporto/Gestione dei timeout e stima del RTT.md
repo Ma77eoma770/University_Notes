@@ -5,6 +5,7 @@ tags:
   - RTT
   - Delay
   - Livello_Trasporto
+  - Networking
 ---
 Il valore di **timeout** impostato deve essere p**iù lungo di un RTT**. Tuttavia, poiché il
 RTT è variabile, è necessario **stimarlo**.

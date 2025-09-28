@@ -5,6 +5,7 @@ tags:
   - Multiplexing_and_Demultiplexing
   - Livello_Trasporto
   - Socket
+  - Networking
 ---
 
 Per implementare le funzionalità di multiplexing e demultiplexing al livello di trasporto, ogni host utilizza indirizzi IP e numeri di porta per indirizzare correttamente un segmento al socket appropriato del destinatario:

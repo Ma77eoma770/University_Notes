@@ -5,6 +5,7 @@ tags:
   - TCP
   - Livello_Trasporto
   - FlowControll
+  - Networking
 ---
 Per poter funzionare correttamente, il protocollo TCP necessita di un **controllo del flusso**. Ad esempio, se la velocità con cui il livello di rete del destinatario fornisce i dati è maggiore rispetto a quella con cui il suo livello di applicazione rimuove i dati dal buffer del socket, il buffer andrà in **overflow**, implicando che i dati in eccesso vengano necessariamente 
 **scartati**, risultando tuttavia come ricevuti correttamente dal destinatario.

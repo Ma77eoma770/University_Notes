@@ -7,6 +7,7 @@ tags:
   - BitTorrent
   - Livello_applicazione
   - Protocollo
+  - Networking
 ---
 Nel trasferimento di file ci sono due protocolli:
 

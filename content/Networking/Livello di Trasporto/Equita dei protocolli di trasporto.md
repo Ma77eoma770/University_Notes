@@ -4,6 +4,7 @@ date:
 tags:
   - Livello_Trasporto
   - Equita
+  - Networking
 ---
 
 > [!info] Proposizione: Equita nelle connessioni

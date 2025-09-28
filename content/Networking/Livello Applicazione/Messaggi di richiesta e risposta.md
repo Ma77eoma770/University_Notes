@@ -6,6 +6,7 @@ tags:
   - Risposta
   - HTTP
   - Livello_applicazione
+  - Networking
 ---
 
 I messaggi HTTP di richiesta e risposta vengono formattati un formato leggibile dall’uomo (in particolare, in codice ASCII).

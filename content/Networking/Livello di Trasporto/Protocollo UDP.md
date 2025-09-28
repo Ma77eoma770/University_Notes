@@ -5,6 +5,7 @@ tags:
   - UDP
   - Protocollo
   - Livello_Trasporto
+  - Networking
 ---
 Come già accennato, il [[Principi delle applicazioni di rete#^ebfa99|protocollo UDP]] è un protocollo di trasporto "senza fronzoli" (bare bone) e senza connessione. Pertanto, non avviene alcun handshake tra mittente e destinatario, implicando che ogni segmento UDP venga gestito indipendentemente dagli altri. Inoltre, il protocollo UDP svolge un servizio best-effort, dunque i segmenti UDP possono essere persi o consegnati in modo non ordinato. Tuttavia, tali caratteristiche rendono UDP vantaggioso in alcune casistiche: 
 - Poiché non vi è alcuna connessione, il protocollo risulta **semplice**, oltre all’assenza del ritardo RTT necessario per l’handshake richiesto 

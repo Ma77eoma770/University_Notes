@@ -6,6 +6,7 @@ tags:
   - GoBackN
   - SelectiveRepeat
   - Livello_Trasporto
+  - Networking
 ---
 ## Protocollo Go-back-N
 

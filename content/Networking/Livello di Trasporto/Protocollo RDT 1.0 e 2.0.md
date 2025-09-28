@@ -5,6 +5,7 @@ tags:
   - RDT
   - Protocollo
   - Livello_Trasporto
+  - Networking
 ---
 All’interno del protocollo **RDT 1.0**, viene assunto che il canale sottostante utilizzato per il trasferimento sia perfettamente affidabile, implicando che il mittente invii i dati nel canale e il ricevitore li legga direttamente, senza alcuna operazione aggiuntiva
 

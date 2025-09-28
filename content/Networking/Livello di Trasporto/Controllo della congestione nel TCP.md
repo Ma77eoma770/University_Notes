@@ -5,6 +5,7 @@ tags:
   - Congestione
   - FlowControll
   - Livello_Trasporto
+  - Networking
 ---
 Per tentare di gestire la congestione, vengono principalmente utilizzati due approcci:
 - Controllo della congestione end-to-end, dove non viene ricevuto alcun feedback esplicito dalla rete e la congestione viene dedotta dalle perdite e ritardi osservati dal mittente e il destinatario. 

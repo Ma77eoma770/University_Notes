@@ -6,6 +6,7 @@ tags:
   - Gerarchia_DNS
   - Livello_applicazione
   - Resource_Record
+  - Networking
 ---
 Poiché il mapping DNS è distribuito su svariati server, dove in particolare nessuno di essi mantiene il mapping di tutti gli IP possibili (un IP corrisponde a 32 bit, dunque $2^{32}$ IP possibili), il database tramite cui viene realizzato il servizio DNS è gerarchico, seguendo la struttura di un albero:
 - **Root Server**:

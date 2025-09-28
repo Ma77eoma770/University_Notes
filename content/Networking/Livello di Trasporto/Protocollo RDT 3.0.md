@@ -5,6 +5,7 @@ tags:
   - RDT
   - Protocollo
   - Livello_Trasporto
+  - Networking
 ---
 Oltre all’assunzione di possibili bit invertiti, il protocollo RDT 3.0 assume la possibilità di una perdita di pacchetti, sia dati che ACK. Per risolvere tale problematica, il mittente attende un lasso di tempo:
 - Il destinatario deve specificare il numero di sequenza del pacchetto per il quale sta inviando un ACK

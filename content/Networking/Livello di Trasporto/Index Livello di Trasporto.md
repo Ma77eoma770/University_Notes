@@ -4,6 +4,7 @@ date:
 tags:
   - Index
   - Livello_Trasporto
+  - Networking
 ---
 I servizi forniti nel livello di trasporto forniscono comunicazione **logica** tra processi applicativi in esecuzione su dispositivi, a differenza del livello di rete, il quale si occupa della comunicazione logica direttamente tra i dispositivi stessi. In particolare, il dispositivo mittente suddivide i messaggi dell’applicazione in **segmenti**, passandoli al livello di rete, mentre il dispositivo destinatario riassembla i segmenti in messaggi.
 

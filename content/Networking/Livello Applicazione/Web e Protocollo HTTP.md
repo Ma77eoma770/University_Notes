@@ -7,6 +7,7 @@ tags:
   - Prestazioni
   - Internet
   - Livello_applicazione
+  - Networking
 ---
 
 Una pagina web è composta da **oggetti**, ognuno dei quali può essere archiviato su un diverso web server. In particolare, una pagina web consiste in un file HTML il quale include diversi oggetti referenziati tramite vari URL

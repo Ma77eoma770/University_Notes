@@ -6,6 +6,7 @@ tags:
   - Trasferimento_file
   - RDT
   - Livello_Trasporto
+  - Networking
 ---
 Per realizzare un trasferimento affidabile dei dati, è necessario implementare un canale sicuro al cui interno non vengano perse o corrotte informazioni.
 

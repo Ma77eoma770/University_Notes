@@ -5,6 +5,7 @@ tags:
   - TCP
   - Livello_Trasporto
   - Handshake
+  - Networking
 ---
 Prima di effettuare lo scambio di dati, il mittente e il destinatario effettuano un handshake, dove viene determinata la disponibilità dell’uno e dell’altro ad accettare di stabilire una connessione, concordando i parametri di quest’ultima (es: l’inizio del numero di sequenza).
 

@@ -5,6 +5,7 @@ tags:
   - FlowControll
   - Congestione
   - Livello_Trasporto
+  - Networking
 ---
 Consideriamo il seguente scenario:
 - Vi sono due connessioni aperte passanti per un router con buffer di dimensione infinita e il transmission rate dei link è R.
