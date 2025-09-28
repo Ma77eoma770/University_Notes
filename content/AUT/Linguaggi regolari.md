@@ -11,7 +11,7 @@ tags:
 > [!info] Definizione: Automa a stati finiti (DFA)
 > Il piu semplice modello di computazione. Scorre l'input bit a bit in modo sequenziale "scorrendolo"
 
-> [!example]- Esempio di un problema
+> [!example] Esempio di un problema
 > Si vuole modellare una porta automatica con sensore che si apre quando qualcuno si trova nelle vicinanze:
 > 
 | /      | Nessuno | Davanti | Dietro | Entrambi |
@@ -81,7 +81,7 @@ $$
 L(M) = \{x \in \Sigma^* : \delta^* (q_0,x) \in F\}
 $$
 
-> [!example]- Esempio:
+> [!example] Esempio:
 > ![[Esempio automa 1.1.png]]
 > $$
 > (q_1, 011) \vdash_M(q_1,11) \vdash_M (q_2,1) \vdash_M (q_2,\epsilon)
