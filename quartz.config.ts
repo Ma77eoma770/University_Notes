@@ -15,7 +15,7 @@ const config: QuartzConfig = {
     analytics: null,
     locale: "en-US",
     baseUrl: "ma77eoma770.github.io/University_Notes/",
-    ignorePatterns: ["private", "templates", ".obsidian", "media","references"],
+    ignorePatterns: ["private", "templates", ".obsidian", "media"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
