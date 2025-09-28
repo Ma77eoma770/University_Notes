@@ -82,7 +82,7 @@ L(M) = \{x \in \Sigma^* : \delta^* (q_0,x) \in F\}
 $$
 
 > [!example]- Esempio:
-> ![[Esempio automa 1.1]]
+> ![[Esempio automa 1.1.png]]
 > $$
 > (q_1, 011) \vdash_M(q_1,11) \vdash_M (q_2,1) \vdash_M (q_2,\epsilon)
 > $$
