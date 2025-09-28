@@ -108,7 +108,8 @@ Dobbiamo eseguire una **prova di correttezza**:
 
 DFA accetta $x \Leftrightarrow x \in L$ . Osserviamo che:
 
-$$\begin{align}
+$$
+\begin{align}
 \delta^*(q_1,u) =q_1 \ \forall u\in\{0,1\}^* \\ 
 \delta^*(q_2,u) =q_2 \ \forall u\in\{0,1\}^*
 \end{align}
