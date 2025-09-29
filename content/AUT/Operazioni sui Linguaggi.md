@@ -14,11 +14,13 @@ Siccome i [[linguaggi regolari]] sono un insieme di stringhe posso considerare s
 - **Intersezione**: $L_1 \cap L_2 = \{ x \in \Sigma^* \ | \ x \in L_1 \ e \ x \in L_2 \}$
 - **Complemento**: $\bar{L_1} = \{ x \in \Sigma^* \ | \ x \notin L_1 \}$
 - **Concatenazione**: Se abbiamo (per le stringhe)
+  
 $$ 
 \begin{gather} 
 x = a_1,...,a_n \ , \quad y=b_1,...,b_m \quad n,m \gt 0 \\ xy = a_1,...,a_n,b_1,...,b_m \in \Sigma^* \\ \epsilon x = x \epsilon = x \\ \begin{cases} x \epsilon = x \\ x(ya)=(xy)a \\ x,y \in \Sigma ^*, \ a \in \Sigma \end{cases} 
 \end{gather}
-$$ Posso concatenare anche linguaggi:  $L_1 \circ L_2 = \{xy \ : \ x \in L_1 \ e \ y \in L_2$ .
+$$
+ Posso concatenare anche linguaggi:  $L_1 \circ L_2 = \{xy \ : \ x \in L_1 \ e \ y \in L_2$ .
 
 > [!hint] Sono tutte le possibili combinazione dei due insiemi prendendo uno dei due come "primo"
 

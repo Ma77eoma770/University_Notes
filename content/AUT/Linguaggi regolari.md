@@ -23,6 +23,9 @@ Si vuole modellare una porta automatica con sensore che si apre quando qualcuno 
 In questo caso un automa che rappresenta il seguente problema puo essere:
 ![[Esempio automa intro.png]]
 
+---
+## Automi
+
 Un automa si presenta cosi:
 
 ![[Esempio automa 1.0.png]]
