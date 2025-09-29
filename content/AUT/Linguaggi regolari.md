@@ -11,6 +11,7 @@ tags:
 > [!info] Definizione: Automa a stati finiti (DFA)
 > Il piu semplice modello di computazione. Scorre l'input bit a bit in modo sequenziale "scorrendolo"
 
+---
 ## Esempio di un problema
 
 Si vuole modellare una porta automatica con sensore che si apre quando qualcuno si trova nelle vicinanze:
