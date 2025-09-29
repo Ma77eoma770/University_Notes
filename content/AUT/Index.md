@@ -4,4 +4,6 @@ date:
 tags:
   - AUT
 ---
-[[Linguaggi regolari]]
+1. Linguaggi regolari
+	1. [[Linguaggi regolari]]
+	2. [[Operazioni sui Linguaggi]]

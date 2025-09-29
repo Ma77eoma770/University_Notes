@@ -11,26 +11,28 @@ tags:
 > [!info] Definizione: Automa a stati finiti (DFA)
 > Il piu semplice modello di computazione. Scorre l'input bit a bit in modo sequenziale "scorrendolo"
 
-> [!example] Esempio di un problema
-> Si vuole modellare una porta automatica con sensore che si apre quando qualcuno si trova nelle vicinanze:
-> 
+## Esempio di un problema
+
+Si vuole modellare una porta automatica con sensore che si apre quando qualcuno si trova nelle vicinanze:
+
 | /      | Nessuno | Davanti | Dietro | Entrambi |
 | ------ | ------- | ------- | ------ | -------- |
 | Chiuso | Chiuso  | Aperto  | Aperto | Aperto   |
 | Aperto | Chiuso  | Aperto  | Aperto | Aperto   |
->
-> In questo caso un automa che rappresenta il seguente problema puo essere:
-> 
-> ![[Esempio automa intro.png]]
+
+In questo caso un automa che rappresenta il seguente problema puo essere:
+![[Esempio automa intro.png]]
 
 Un automa si presenta cosi:
 
 ![[Esempio automa 1.0.png]]
 
 Dove:
-q1,q2,q3: sono **STATI**
-q2: e uno **STATO DI ACCETTAZIONE**
-->: si chiamano **TRANSAZIONI**
+q1,q2,q3: sono **STATI**.
+
+q2: e uno **STATO DI ACCETTAZIONE.**
+
+->: si chiamano **TRANSAZIONI.**
 
 In questo caso questo automa accetta ad esempio la stringa 11101
 
