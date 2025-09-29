@@ -144,6 +144,7 @@ $$
 
 > [!hint] Abbiamo gia dimostrato che se entro in q1,q2 ci rimango . Con quest'ultimo passaggio abbiamo dimostrato che avendo una stringa u (che rappresenta qualsiasi combinazione binaria di lunghezza n) e un ultimo carattere a, in ogni caso, entriamo in q1,q2
 
+Sui linguaggi possiamo effettuare [[Operazioni sui Linguaggi]]
 
 
 
