@@ -58,14 +58,16 @@ article {
   > mjx-container.MathJax,
   blockquote > div > mjx-container.MathJax {
     display: flex;
-    > svg {
-      margin-left: auto;
-      margin-right: auto;
-    }
+    overflow-x: auto;
+    max-width: 100%;
+
   }
   blockquote > div > mjx-container.MathJax > svg {
     margin-top: 1rem;
     margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
 }
 
