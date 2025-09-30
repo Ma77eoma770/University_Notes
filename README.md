@@ -9,9 +9,9 @@ This repository contains my personal notes created with Obsidian
 
 - Notes are organized first by subject, then by main topics/milestones.
 - Quartz makes them easy to explore with links and a graph view.
-- Goal: simple access, sharing, and review of notes.
+- Goal: simple access, sharing, backup and review of notes.
 
 🚀 Tech
 
 - Obsidian → note-taking and organization
-- Quartz → publishing and visualization
+- Quartz → Visualization
