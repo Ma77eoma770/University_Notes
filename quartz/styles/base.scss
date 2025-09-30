@@ -58,7 +58,7 @@ article {
   > mjx-container.MathJax,
   blockquote > div > mjx-container.MathJax {
     display: flex;
-    overflow-x: auto;
+    overflow-x: hidden;
     max-width: 100%;
 
   }
