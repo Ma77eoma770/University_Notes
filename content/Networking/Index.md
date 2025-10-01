@@ -6,6 +6,11 @@ tags:
   - Networking
 ---
 
+> [!warning] Avviso
+Questi appunti derivano dal corso di **Reti degli Elaboratori** tenuto dal Prof. Alessandro Checco (a.a. 24/25).  
+Il materiale potrebbe non riflettere le versioni più recenti delle slide, che vengono aggiornate annualmente.  
+Si raccomanda quindi di verificare sempre la versione ufficiale fornita dal docente.
+
 1. [[Index Introduzione alle reti|Introduzione alle reti]]
 	1. [[Rete, Host e Collegamenti]]
 	2. [[Struttura di Internet]]
