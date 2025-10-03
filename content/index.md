@@ -6,7 +6,7 @@
 
 1. [[AUT/Index|Automi, Calcolabilita, Complessita]]
 2. [[IUM/Index|Interazione Uomo-Macchina]]
-3. [[WEB/Index|Programmazione Web]]
+3. [[WEB/Git/Index|Programmazione Web]]
 
 ![[student-studying.gif]]
 

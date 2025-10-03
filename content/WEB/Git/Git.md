@@ -60,4 +60,6 @@ Si tratta di un revisionismo storico ovvero modifica la storia in modo che sia l
 - git add: Aggiunge allo staging.
 - git commit -m: Crea un commit.
 - git log: Visualizza la storia
+- git checkout: Cambi branch/commit
+- git branch: Fa vedere tutto ciò che riguarda i branch
 
