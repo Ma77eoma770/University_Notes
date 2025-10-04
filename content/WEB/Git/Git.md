@@ -63,4 +63,4 @@ Si tratta di un revisionismo storico ovvero modifica la storia in modo che sia l
 - git checkout: Cambi branch/commit.
 - git branch: Fa vedere tutto ciò che riguarda i branch.
 - git remote -v: ...
-- prova 4
+- prova 5
