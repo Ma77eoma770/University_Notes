@@ -64,7 +64,7 @@ Vogliamo studiare la proprieta di chiusura dei linguaggi regolari. Ovver: se $L_
 > 
 > **Idea**: Devo farla in parallelo su $M_1,M_2$ e accettare $\Leftrightarrow$ uno dei due automi accetta.
 
-Per l'unione e per l'intersezione possiamo ancora arrivarci con gli elementi che abbiamo ora, successivamente dobbiamo introdurre per facilita il [[non determinismo]] con cui andremo a rifare la dimostrazione per unione e intersezioni in maniera molto piu chiara.
+Per l'unione e per l'intersezione possiamo ancora arrivarci con gli elementi che abbiamo ora, successivamente dobbiamo introdurre per facilita il [[Non determinismo]] con cui andremo a rifare la dimostrazione per unione e intersezioni in maniera molto piu chiara.
 
 ### Unione & Intersezione
 
