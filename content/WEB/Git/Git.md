@@ -10,6 +10,7 @@ tags:
 
 ![[git meme 1.0.png|500]]
 ## Perchè git?
+
 Git (e github) è utile per:
 - Tracciare e valutare modifiche.
 - Comparare diverse versioni/implementazioni (e.g. diverse ottimizzazioni di un algoritmo).
@@ -42,16 +43,19 @@ Quando due branch non sono sincronizzati entra in gioco il merge che fonde i cam
 Assumiamo di fare merge di B in A. Valido se il branch B è una continuazione di A.
 
 ![[Fast Forward Before.png|700]]
-![[Pasted image 20250930194507.png]]
+![[Fast Forward After.png]]
 ### Merge Commit
 
 Crea un nuovo commit con due genitori
-![[Pasted image 20250930194539.png]]
-![[Pasted image 20250930194552.png]]
+
+![[Merge Commit Before.png]]
+![[Merge Commit After.png]]
 ### Rebase
 
 Si tratta di un revisionismo storico ovvero modifica la storia in modo che sia lineare e applica fast-forward. Ricrea ogni commit non in comune tra A e B dopo l'ultimo in A. I commit originali nel branch, ora spostato, rimangono appesi (dangling)
-[[mmagini ppt]]
+
+![[Rebase Before.png]]
+![[Rebase After.png]]
 
 ## Comandi Essenziali
 
@@ -60,6 +64,8 @@ Si tratta di un revisionismo storico ovvero modifica la storia in modo che sia l
 - git add: Aggiunge allo staging.
 - git commit -m: Crea un commit.
 - git log: Visualizza la storia.
-- git checkout: Cambi branch/commit.
-- git branch: Fa vedere tutto ciò che riguarda i branch.
-- prova finale
+
+![[git meme 1.6.png]]
+
+## Git Flow
+...

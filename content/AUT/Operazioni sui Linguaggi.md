@@ -64,4 +64,24 @@ Vogliamo studiare la proprieta di chiusura dei linguaggi regolari. Ovver: se $L_
 > 
 > **Idea**: Devo farla in parallelo su $M_1,M_2$ e accettare $\Leftrightarrow$ uno dei due automi accetta.
 
-...
+Per l'unione e per l'intersezione possiamo ancora arrivarci con gli elementi che abbiamo ora, successivamente dobbiamo introdurre per facilita il [[non determinismo]] con cui andremo a rifare la dimostrazione per unione e intersezioni in maniera molto piu chiara.
+
+### Unione & Intersezione
+
+Siano 
+$$M_1 = (Q_1, \Sigma, \delta_1,q_{01}, F_1), \ M_2 = (Q_2, \Sigma, \delta_2, q_{02}, F_2) \ t.c.  \ L(M_1) = L_1 \ , \ L(M_2) = L_2$$ 
+Devo costruire $M = (Q, \Sigma, \delta, q_0, F) \ t.c. \ L(M) = L$.
+Avremo:
+- $Q = \{(r_1,r_2) \ t.c. \ r_1 \in Q_1 , \ r_2 \in Q_2 \} = Q_1 \times Q_2$ 
+- $\delta = Q \times \Sigma \Rightarrow Q$ $$\delta((r_1,r_2),a) = (\delta_1 (r_1,a) , \ \delta_2(r_2,a)) \in Q$$
+- $F = \{ (r_1,r_2) \ | \ r_1 \in F_1 \lor r_2 \in F_2 \} = (F_1 \times Q_2) \cup (F_2 \times Q_1)$ 
+
+
+> [!warning] La dimostrazione per l'intersezione e analoga l'unica cosa che cambia e invece dell'or logico e insiemistico alla fine ci sarebbero due simboli di intersezione quindi $F_1 \times F_2 = F$
+
+### Concatenazione & Star
+
+Per verificare la chiusura sulla concatenzione e sulla star consideriamo $L_1 \in REG, \ L_2 \in REG$ regolari da cui vorremmo dimostrare che anche $L_1 \circ L_2 \in REG$ e regolare.
+Dato $x$ devo "capire" come spezzare $x$ in $x_1 \circ x_2 = x_1 x_2 \ t.c. \ x1 \in L_1 , \ x_2 \in L_2$.
+Sembra complicato e per risolverlo agilmente introduciamo il concetto di [[Non determinismo| non determinismo]]
+
