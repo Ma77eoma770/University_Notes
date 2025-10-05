@@ -52,7 +52,7 @@ $$
 > $L=\{a,b\} \quad L^*= \{ \epsilon,a,b,aa,ab,bb,ba,aaa,...\}$
 
 
-## Proprieta 
+## Proprieta (Determinismo)
 
 Vogliamo studiare la proprieta di chiusura dei linguaggi regolari. Ovver: se $L_1, \ L_2 \in \ REG$, posso dire che $L_1 \cup L_2 \in \ REG$? $L_1 \cap L_2$? $\bar{L_1}$? $L_1^*$?
 
@@ -85,3 +85,23 @@ Per verificare la chiusura sulla concatenzione e sulla star consideriamo $L_1 \i
 Dato $x$ devo "capire" come spezzare $x$ in $x_1 \circ x_2 = x_1 x_2 \ t.c. \ x1 \in L_1 , \ x_2 \in L_2$.
 Sembra complicato e per risolverlo agilmente introduciamo il concetto di [[Non determinismo| non determinismo]]
 
+## Proprieta (Non Determinismo)
+
+### Unione & Intersezione
+
+![[Unione chiusa immagine.png]]
+
+- $Q = Q_1 \cup Q_2 \cup \{q_0\}$
+- $F=F_1 \cup F_2$
+- $\forall q \in Q, \ a \in \Sigma_{\epsilon}$ 
+- $\delta(q,a) \begin{cases} \delta_1(q,a),\ se \ q \in Q_1 \\ \delta_2(q,a), \ se \ q \in Q_2 \\ \{q_0^1,q_0^2\}, \ se \ q = q_0 \ a = \epsilon \\ \emptyset, \ se \ q= q_0 \ a \ne \epsilon \end{cases}$ 
+### Concatenazione
+Dato NFA $N_1,N_2$ per $L_1,L_2$ costruisco NFA per $L_1 \circ L_2$ 
+
+![[Concatenazione chiusura immagine.png]]
+
+$N=(Q,\Sigma,\delta, q_0, F)$
+- $q_0=q_0^1$
+- $Q = Q_1 \cup Q_2$
+- $F = F_2$
+- $\forall q \in Q, \ \forall a \in \Sigma_{\epsilon}$: $$\delta(q,a)= \begin{cases} \delta_1(q,a) \quad q \in Q_1,\ q \notin F_1 \\ \delta_1(q,a) \quad q \in F_1, \ a \ne \epsilon \\ \delta_1(q,a) \cup \{ q_0^2\} \quad q \in F_1,\ a= \epsilon \\ \delta_2(q,a) \quad q \in Q_2\end{cases}$$
