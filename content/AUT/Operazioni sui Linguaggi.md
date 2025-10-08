@@ -105,3 +105,23 @@ $N=(Q,\Sigma,\delta, q_0, F)$
 - $Q = Q_1 \cup Q_2$
 - $F = F_2$
 - $\forall q \in Q, \ \forall a \in \Sigma_{\epsilon}$: $$\delta(q,a)= \begin{cases} \delta_1(q,a) \quad q \in Q_1,\ q \notin F_1 \\ \delta_1(q,a) \quad q \in F_1, \ a \ne \epsilon \\ \delta_1(q,a) \cup \{ q_0^2\} \quad q \in F_1,\ a= \epsilon \\ \delta_2(q,a) \quad q \in Q_2\end{cases}$$
+### Star
+
+Dato NFA N t.c. $L(N) = L$ devo costruire $\text{NFA} \ N^* \ t.c. \ L(N^*) = L^*$ 
+
+![[Star rapresentation conc.png]]
+
+$$
+\begin{align}
+&L = \{ a,ab,ba\} \\
+&L^2 = \{ aa,aab,aba,abab\} \\
+&\vdots \\
+&L^3,L^4,... L^*= \bigcup_{k=0} L^k
+\end{align}
+$$
+
+Finalmente: $N^* = (Q', \Sigma, \delta',q_0',F')$ 
+- $q_0'$ è il nuovo stato iniziale.
+- $F' = F \cup \{q_0'\} ; \quad Q'=Q \cup \{q_0'\}$  
+- $\forall q \in Q', \ \forall a \in \Sigma_{\epsilon}$:
+  $$\delta(q,a) =  \begin{cases} \delta(q,a) \quad &q \in Q, \ q \notin F \\ \delta(q,a) \quad &q \in F, \ a \ne \epsilon \\ \delta(q,a) \cup \{q_0\} \quad &q \in F, \ a = \epsilon \\ \{q_0\} \quad &q=q_0', \ a = \epsilon \\ \emptyset \quad &q=q_0', \ a \ne \epsilon \end{cases}$$
