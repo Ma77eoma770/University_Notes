@@ -76,4 +76,4 @@ $F_D = \{ q_{\{ 1\}}, q_{\{ 1,2\}}, q_{\{ 1,3\}}, q_{\{ 1,2,3\}} \}$
  - ...
 Dopo aver semplificato otteniamo una cosa del genere:
 
-![[Esercizio NFA=DFA finale|600]]
+![[Esercizio NFA=DFA finale.png|600]]
