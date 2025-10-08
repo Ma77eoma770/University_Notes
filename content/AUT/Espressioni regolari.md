@@ -11,7 +11,8 @@ tags:
 > Sono come espressioni algebriche, ma definiscono linguaggi su un certo alfabeto
 
 > [!example] Esempio: $(0 \cup 1)0^*$
-> Sviluppando: $$\begin{gather} (0 \cup 1) &= \{ 0, \ 1\} \\ 0^* &= \{0\}^* \\ (0 \cup 1) 0^* &= \{0, \ 1\} \circ \{0\}^* \end{gather}$$
+> Sviluppando: 
+> $$ \begin{gather} (0 \cup 1) &= \{ 0, \ 1\} \\ 0^* &= \{0\}^* \\ (0 \cup 1) 0^* &= \{0, \ 1\} \circ \{0\}^* \end{gather}$$
 
 ## Definizione Formale
 
@@ -29,4 +30,20 @@ Ogni espressione regolare ha associato un linguaggio $L(r) \ t.c. \ r \in re(\Si
 ## Uguaglianza $REG \equiv L(re)$ 
 
 Un linguaggio è regolare $\Leftrightarrow$ esiste un'espressione regolare che lo descrive:$$REG \equiv L(re)$$
-...
+
+### Dimostrazione
+
+Dimostriamo prima che $L(re) \subseteq REG$:
+
+Data l'espressione regolare $r$, costruisco un NFA/DFA $N_r \ t.c. \ L(N_r) = L(r)$.
+Nel farlo ci aiutiamo con la [[Espressioni regolari#Definizione Formale|definizione ricorsiva]] che abbiamo considerato.
+
+**Caso Base**: 
+- $r = a, \quad a \in \Sigma$$$\begin{gather} N_r = (\{q_1,q_2\},\Sigma,\delta,q_1,\{q_2\}) \\ \delta =\begin{cases} (q_1,a) = q_2 \\ (q,b)= \emptyset \quad se \ q \ne q_1, \ b \ne a \end{cases} \end{gather}$$
+  ![[casobase1.png|400]]
+
+- $r = \epsilon$ $$\begin{gather} N_r = (\{q_1\}, \Sigma, \delta,q_1,\{q_1\}) \\ \delta(q_1,b)= \emptyset \quad \forall b\in\Sigma \end{gather}$$
+![[casobase2.png|400]]
+
+- $r = \emptyset$ $$\begin{gather} N_r = (\{q_1\}, \Sigma, \delta,q_1,\{ \emptyset\}) \\ \delta(q_1,b)= \emptyset \quad \forall b\end{gather}$$
+  ![[casobase3.png|400]]
