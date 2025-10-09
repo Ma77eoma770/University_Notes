@@ -54,6 +54,7 @@ Un linguaggio è regolare $\Leftrightarrow$ esiste un'espressione regolare che l
 
 ### Dimostrazione
 
+#### $L(re) \subseteq REG$
 Dimostriamo prima che $L(re) \subseteq REG$:
 
 Data l'espressione regolare $r$, costruisco un NFA/DFA $N_r \ t.c. \ L(N_r) = L(r)$.
@@ -99,7 +100,31 @@ Stesso discorso per le altre operazioni.
 
 ---
 
-Ora dobbiamo dimostrare che $REG \subseteq L(re)$ ovvero partiamo da un NFA N per ottenere un $L \in REG$   ($L(N) = L$).
-Per facilitare la conversione in un'espressione regolare introduciamo l'**NFA generalizzato (GNFA)** 
+#### $REG \subseteq L(re)$
 
-...  
+Ora dobbiamo dimostrare che $REG \subseteq L(re)$ ovvero partiamo da un NFA N per ottenere un $L \in REG$   ($L(N) = L$).
+Per facilitare la conversione in un'espressione regolare introduciamo l'[[NFA generalizzato (GNFA)]] 
+Siamo ora pronti a convertire G in un'espressione regolare:
+**Convert(G)**:
+- Sia k = # stati in G.
+- Se k = 2, G avrà 2 stati e saranno $q_{start},q_{accept}$ e un singolo arco con etichetta $R \in \mathcal{R}$. Output: R.
+- Se k $\gt$ 2, scelgo uno stato $q_{rip} \in Q,\ q_{rip} \ne q_{start}, q_{acc}$ e definisco $G'=(Q',\Sigma,\delta',q_{start}, q_{acc})$
+  $Q'=Q \setminus \{q_{rip}\}$
+  $\delta'=? \quad \delta':Q' \setminus \{q_{acc}\} \times Q' \setminus \{q_{start}\} \Rightarrow \mathcal{R}$
+  $\forall q_i \in Q' \setminus \{q_{acc}\},q_j \in Q' \setminus \{q_{start}\}$
+  $\delta'(q_i,q_j) = (R_1)(R_2)^*(R_3) \cup (R_4)$
+
+...disegno
+
+> [!success] Lancio Convert($G'$)
+
+**Per concludere**: Devo dimostrare che **Convert(G)** è equivalmente a G.
+**Caso base**: Per k = 2 è sicuramente vero (banale). L'espressione regolare R descrive tutte le stringhe che portano G da $q_{start}$ a $q_{acc}$. 
+**Caso induttivo**: Suppongo vero per $k-1$ stati e faccio vedere che è vero per k stato. Basta mostrare che:
+$$L(G)=L(G')$$
+così la prova segue dall'ipotesi induttiva siccome # stato di $G'$ è $k - 1$.
+Ma se $G$ accetta $w$ allora $\exists$ un ramo di computazione t.c. G percorre gli stati $q_{start},q_1,...,q_{acc}$. 
+Se questo percorso non contiene $q_{rip}$ allora banalmente $L(G)=L(G')$ perchè le nuove espressioni regolari contengono le vecchie come unione.
+Se c'è $q_{rip}$ avrò ad esempio $q_1,q_{rip},q_2$ e quindi una nuova sequenza di stati per $G'$. Ma gli stati adiacenti a $q_{rip} (q_1,q_2)$ in $G'$ hanno un arco che tiene conto di tutti i modi per andare da $q_1$ a $q_2$: direttamente o passando per $q_{rip}$. Quindi ancora $L(G)=L(G')$.
+
+Esercizio pratico...
