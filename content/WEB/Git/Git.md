@@ -67,5 +67,7 @@ Si tratta di un revisionismo storico ovvero modifica la storia in modo che sia l
 
 ![[git meme 1.6.png]]
 
-## Git Flow
-...
+## Cheat-Sheet
+
+![[cs1.png]]
+![[cs2.jpg]]

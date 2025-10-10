@@ -42,7 +42,7 @@ Ogni messaggio di **richiesta HTTP** viene strutturato nel seguente modo:
 ![[Struttura_richiesta_http.PNG]]
 
 > [!example] Esempio:
-> ```
+> ```HTTP
 > GET /index.html HTTP/1.1\r\n 
 > Host: www-net.cs.umass.edu\r\n 
 > User-Agent: Firefox/3.6.10\r\n 
@@ -53,12 +53,13 @@ Ogni messaggio di **richiesta HTTP** viene strutturato nel seguente modo:
 > Keep-Alive: 115\r\n 
 > Connection: keep-alive\r\n 
 > \r\n
+> ```
 ## Risposta
 
 Ogni messaggio di **risposta HTTP** viene strutturato nel seguente modo: 
 
 1. Una **riga di stato**: composta dalla versione di HTTP utilizzata, un **codice di status** e una **frase di status** che descrive in breve il codice di status.
-   I codici di status si dividono in 5 categorie: 
+   I codici di status si dividono in 5 categorie:  ^0e53d8
 	   - Codici 1xx, indicanti che la risposta ricevuta contiene solamente informazioni (es: 100 Continue indica che il server è pronto a ricevere la richiesta del client).
 	   - Codici 2xx, indicanti che la richiesta effettuata è andata a buon fine (es: 200 OK indica che la richiesta ha avuto successo e l’oggetto richiesto è stato trovato, 204 No Content indica che la richiesta ha avuto successo ma l’oggetto richiesto non contiene nulla al suo interno).
 	   - Codici 3xx, indicanti che è stato effettuato un reindirizzamento a seguito della richiesta effettuata (es: 301 Moved Permanently indica che l’oggetto richiesto possiede un path diverso da quello richiesto, reindirizzando automaticamente tutte le richieste successive del client).

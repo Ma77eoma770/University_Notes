@@ -21,6 +21,8 @@ Una pagina web è composta da **oggetti**, ognuno dei quali può essere archivia
 > 2. Vengono **scambiati messaggi HTTP** tra client e server .
 > 3. La **connessione TCP viene chiusa**.
 
+^a5f4c8
+
 Le **connessioni HTTP** si differenziano in due tipologie: 
 - **Connessione non persistente**: dove viene aperta la connessione TCP e viene inviato massimo **un oggetto** prima di chiudere la connessione TCP.
 - **Connessione persistente (HTTP/1.1)**: dove viene aperta la connessione TCP e vengono inviati **multipli oggetti** in successione prima di chiudere la connessione TCP. ^9fd35d
