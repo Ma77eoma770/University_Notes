@@ -7,5 +7,4 @@ tags:
 ---
 1. [[Git]]
 2. [[HTTP]]
-	1. [[Esempio API]]
-3. [[API]]
+	1. [[Esercizio HTTP]]

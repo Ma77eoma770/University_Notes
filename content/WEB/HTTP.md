@@ -96,11 +96,51 @@ GET /course-descriptions/web-and-software-architecture
 > [!hint] Display di una risorsa
 ### POST
 
+Crea o modifica un subordinato della risorsa indicata nell'URI. L'URI identifica
+la risorsa che gestirà la richiesta.
+
+```HTTP
+POST /announcements/
+```
+
+**CACHEABLE**
+
+> [!hint] Invia dati all' O per creare una risorsa, se già esiste la modifica
 
 ### DELETE
 
+Richiede di rimuovere la risorsa target e la sua funzionalità attuale.
 
+```HTTP
+DELETE /courses/web-and-software-architecture
+```
 
+**IDEMPOTENT**
+
+> [!hint] Elimina una risorsa
+
+---
 ## Messaggi di Stato
 
 ![[Messaggi di richiesta e risposta#^0e53d8]]
+
+| Codice di stato     | Descrizione   |
+| ------------------- | ------------- |
+| 1xx (Informational) | Hold on       |
+| 2xx (Successful)    | Here you go   |
+| 3xx (Redirection)   | Go away       |
+| 4xx (Client Error)  | You fucked up |
+| 5xx (Server Error)  | I fucked up   |
+
+---
+
+## cURL
+
+| Metodo        | Scopo                                                             | Sintassi cURL                                                                                                                      |
+| ------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| GET (default) | Scarica il contenuto della risorsa                                | curl https://swapi.dev/api/people/1/                                                                                               |
+| HEAD          | Richiede solo le intestazioni (Header), non il corpo.             | curl -I https://swapi.dev/api/people/1/                                                                                            |
+| POST          | Invia dati per creare una nuova risorsa                           | curl -X POST -H "Content-Type:<br>application/json" -d '{"title": "Test"}'<br>https://jsonplaceholder.typicode.com/posts           |
+| PUT           | Invia dati per sostituire una risorsa esistente (**idempotente**) | curl -X PUT -H "Content-Type:<br>application/json" -d '{"id": 1,"title":"New Title"}' https://jsonplaceholder.typicode.com/posts/1 |
+| DELETE        | Elimina la risorsa                                                | curl -X DELETE https://jsonplaceholder.typicode.com/posts/1                                                                        |
+| HEADERS       | Visualizza tutte le intestazioni (opzione per GET)                | curl -i https://swapi.dev/api/people/1/                                                                                            |
