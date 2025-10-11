@@ -52,4 +52,4 @@ I supporti fisici utilizzabili per una trasmissione si differenziano in:
 
 ## Back Links
 
-[[Networking/Index]]
+[[RDE/Index]]

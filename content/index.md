@@ -1,6 +1,6 @@
 ## Secondo anno 
 
-1. [[Networking/Index|Reti Degli Elaboratori]]
+1. [[RDE/Index|Reti Degli Elaboratori]]
 
 ## Terzo anno
 
