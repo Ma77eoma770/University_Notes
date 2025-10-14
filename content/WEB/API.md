@@ -67,19 +67,3 @@ info:
 paths: () # Gli endpoin dell'API verrebbero definiti qui
 ```
 
-## Esempio completo
-
-Ipotizziamo di dover sviluppare un gioco "Hi-Lo":
-- Io penso ad un numero segreto tra 1 e 100
-- Tu provi ad indovinarlo con al più 10 tentativi
-- Ad ogni tentativo, ti dirò se il tuo tentativo era troppo alto basso o è giusto.
-
-Richiede le seguenti **funzionalità**:
-1. **Avviare** una nuova partita.
-2. **Accettare** un tentativo (fino a 10) e restituire "hi" o "lo" o "correct".
-3. **Resettare** una partita, generando un nuovo numero segreto.
-4. **Ottenere** la lista di ogni tentativo in una partita, con i relativi risultati.
-5. **Ottenere** la lista di tutte le partite, con il risultato finale (vittoria/sconfitta) e il numero di tentativi
-
-> [!example] **Domanda di Design**: Quali **risorse** designeresti per soddisfare questi requisiti?
-
