@@ -80,8 +80,8 @@ paths:
                       example: 3
 ```
 
-![[Pasted image 20251014170732.png]]
+![[HiLo-game 1.png]]
 
-![[Pasted image 20251014170804.png]]
+![[HiLo-game 2.png]]
 
-![[Pasted image 20251014170836.png]]
+![[HiLo-game 3.png]]

@@ -1,15 +1,17 @@
 ## AUT
 
-- [ ] Appunti 10/10 (@2025-10-12)
+- [ ] Appunti 10/10
+- [ ] Appunti 15/10
 ## IUM
 
-- [ ] Appunti riassuntivi fino ad oggi 11/10 (@2025-10-13 10:00)
+- [ ] Appunti riassuntivi fino ad oggi 11/10
 ## PEM
 
-- [ ] Appunti C + ultima lezione (@2025-10-15)
+- [ ] Appunti C + ultima lezione
 ## WEB
 
 - [x] Appunti API (@2025-10-11 16:33)
+- [ ] Appunti HiLo 14/10
 ## ISW
 
-- [ ] Appunti riassuntivi fino ad oggi 11/10 (@2025-10-13)
+- [ ] Appunti riassuntivi fino ad oggi 11/10
