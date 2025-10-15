@@ -1,7 +1,7 @@
 ## AUT
 
-- [ ] Appunti 10/10
-- [ ] Appunti 15/10
+- [x] Appunti 10/10
+- [x] Appunti 15/10
 ## IUM
 
 - [ ] Appunti riassuntivi fino ad oggi 11/10

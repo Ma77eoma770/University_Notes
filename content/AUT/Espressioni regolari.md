@@ -109,9 +109,13 @@ Siamo ora pronti a convertire G in un'espressione regolare:
 - Sia k = # stati in G.
 - Se k = 2, G avrà 2 stati e saranno $q_{start},q_{accept}$ e un singolo arco con etichetta $R \in \mathcal{R}$. Output: R.
 - Se k $\gt$ 2, scelgo uno stato $q_{rip} \in Q,\ q_{rip} \ne q_{start}, q_{acc}$ e definisco $G'=(Q',\Sigma,\delta',q_{start}, q_{acc})$
+  
   $Q'=Q \setminus \{q_{rip}\}$
+  
   $\delta'=? \quad \delta':Q' \setminus \{q_{acc}\} \times Q' \setminus \{q_{start}\} \Rightarrow \mathcal{R}$
+  
   $\forall q_i \in Q' \setminus \{q_{acc}\},q_j \in Q' \setminus \{q_{start}\}$
+  
   $\delta'(q_i,q_j) = (R_1)(R_2)^*(R_3) \cup (R_4)$
 
 ...disegno
