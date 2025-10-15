@@ -11,7 +11,7 @@
 ## WEB
 
 - [x] Appunti API (@2025-10-11 16:33)
-- [ ] Appunti HiLo 14/10
+- [ ] Appunti HiLo +  REST 14/10
 ## ISW
 
 - [ ] Appunti riassuntivi fino ad oggi 11/10
