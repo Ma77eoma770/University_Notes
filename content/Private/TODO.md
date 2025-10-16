@@ -12,6 +12,7 @@
 
 - [x] Appunti API (@2025-10-11 16:33)
 - [ ] Appunti HiLo +  REST 14/10
+- [ ] Registrarsi per l'hw
 ## ISW
 
 - [ ] Appunti riassuntivi fino ad oggi 11/10
