@@ -13,3 +13,4 @@ tags:
 		1. [[NFA generalizzato (GNFA)]]
 	4. [[Pumping Lemma]]
 	5. [[Grammatiche Acontestuali]]
+	6. [[Forma Canonica]]

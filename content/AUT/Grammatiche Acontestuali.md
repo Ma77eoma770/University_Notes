@@ -5,6 +5,7 @@ tags:
   - AUT
   - Grammatica_Acontestuale
 ---
+## Intro
 Introduciamo un modello di computazione più potente. Utile in diverse applicazioni (es. parser).
 Vedremo che le grammatiche coincidono anche con un diverso tipo di automa.
 Ad esempio sarà molto facile dare una grammatica che genera le stringhe $0^n1^n$ con $n \geq 0$. Prendiamolo come esempio:
@@ -49,6 +50,7 @@ $$
 E \overset{R_2}{\Rightarrow} E*E \overset{R_3}{\Rightarrow}(E)*E \overset{R_1}{\Rightarrow} (E+E)*E \overset{R_4^3}{\Rightarrow} (3+4)*4
 $$
 
+## Definizione formale
 > [!info] Definizione: CFG (Context Free Grammar)
 > Una CFG è una tupla $(V,\Sigma,R,S)$ dove:
 > - V è un insieme finito di variabili
@@ -71,8 +73,46 @@ Sia $G=(V,\Sigma,R,S)$, allora $L(G) = \{ w \in \Sigma^* \ : \ S \overset{*}{\Ri
 > $R: \ S \Rightarrow aSb|SS|\epsilon$
 
 Iniziamo a vedere alcune tecniche per la costruzione di grammatiche:
-1. Unione di grammatiche
-2. Da DFA alle grammatiche
-3. Sfruttare la ricorsione
+1. **Unione** di grammatiche
+2. Da **DFA** alle grammatiche
+3. Sfruttare la **ricorsione**
 
-...
+### Unione
+$G_i = (V_i, \Sigma_i, R_i,S_i)$ tutte CFG $\forall i \in[k]$ con $k \in \mathbb{N}$ quindi k = 1,2,3,...
+Vogliamo CFG $G = (V, \Sigma, R, S) \ t.c. \ L(G) = \bigcup_i L(G_i)$ 
+
+**Idea Naturale**: 
+- V = $\bigcup_i V_i \cup \{S\}$ wlog, possiamo assumere che $V_i \cap V_j = \emptyset \quad \forall i,j \in [k] \ t.c. \ i \ne j$ 
+- S = Nuova variabile iniziale
+- $\Sigma = \bigcup_i \Sigma_i$
+- $R = \bigcup_i R_i \cup \{S \Rightarrow S_1 |...| S_k\}$ ovvero creiamo un nuovo stato iniziale da cui si può andare ad ogni stato dopo (sarebbe collegato solo agli stati iniziali ma da lì posso andare ovunque).
+
+**Correttezza**: 
+Devo arrivare a dire che $\bigcup_i L(G_i) = L(G)$ 
+
+Parto da $\bigcup_i L(G_i) \subseteq L(G)$:
+Sia $w \in \bigcup_i L(G_i)$ vuol dire che $\exists j \in [k] \ t.c. \ w \in L(G_j) \quad S_j \overset{*}{\Rightarrow_{G_j}} w$
+ma allora per definizione $S \Rightarrow S_j \overset{*}{\Rightarrow_{G_j}}w$ ovvero $w \in L(G_j)$ 
+
+Continuando con $L(G) \subseteq \bigcup_i L(G_i)$. Sia $w \in L(G)$ ovvero $S \overset{*}{\Rightarrow_G}w$.
+Per definizione $\exists j \in [k] \ t.c. \ S \Rightarrow S_j\overset{*}{\Rightarrow_G}w$ 
+Siccome $V_j$ è disgiunto da tutte le altre variabili $S \Rightarrow S_j \overset{*}{\Rightarrow_{G_j}}$ quindi $w \in L(G_j) \subseteq \bigcup_i L(G_i)$
+### DFA $\Rightarrow$ CFG
+Dato un DFA $D=(Q,\Sigma,\delta,q_o,F)$ voglio definire $G=(V,\Sigma,R,S) \ t.c. \ L(G) = L(D)$.
+**Idea Naturale**:
+- $\Sigma$ è uguale
+- $V = \{V_q : q \in Q\}$ 
+- $S = V_{q_0}$ 
+- Aggiungo la regola $V_q \Rightarrow aV_p \quad \forall p,q \in Q, a \in \Sigma \ t.c. \ \delta(q,a)=p$ 
+- $\forall q \in F$ aggiungo $V_q \Rightarrow \epsilon$ 
+**Esempio**:
+
+![[CFG example.png]]
+
+Questo DFA otterrà $w=ab\in L(D)$
+Ma anche G produrrà $w=ab$
+$S=V{q_0} \overset{R_1}{\Rightarrow}aV_{q_1} \quad V_{q_1}\overset{R_2}{\Rightarrow}bV_{q_2} \quad V_{q_2}\overset{R_3}{\Rightarrow}\epsilon$
+quindi $V_{q_0}\overset{R_1}{\Rightarrow}aV_{q_1}\overset{R_2}{\Rightarrow}abV_{q_2}\overset{R_3}{\Rightarrow}ab \epsilon \Rightarrow ab$
+
+### Ricorsione
+E' spesso utile la ricorsione $R \Rightarrow 0R_1 1$. Regole di questo tipo consentono di ricordare una "informazione limitata" (non si possono tradurre proprio tutte le grammatiche).
