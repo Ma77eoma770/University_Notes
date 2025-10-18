@@ -28,3 +28,4 @@ I tre punti sono dimostrati.
 
 > [!info] Proposizione:
 > Se L è un linguaggio regolare, ed L′ un sottoinsieme di L, allora L′ non è necessariamente regolare.
+
