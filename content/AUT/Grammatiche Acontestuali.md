@@ -91,7 +91,7 @@ Vogliamo CFG $G = (V, \Sigma, R, S) \ t.c. \ L(G) = \bigcup_i L(G_i)$
 Devo arrivare a dire che $\bigcup_i L(G_i) = L(G)$ 
 
 Parto da $\bigcup_i L(G_i) \subseteq L(G)$:
-Sia $w \in \bigcup_i L(G_i)$ vuol dire che $\exists j \in [k] \ t.c. \ w \in L(G_j) \quad S_j \overset{*}{\Rightarrow_{G_j}} w$
+Sia $w \in \bigcup_i L(G_i)$ vuol dire che $\exists j \in [k] \ t.c. \ w \in L(G_j) \quad S_j \overset{*}{\Rightarrow_{G_j}} w$ 
 ma allora per definizione $S \Rightarrow S_j \overset{*}{\Rightarrow_{G_j}}w$ ovvero $w \in L(G_j)$ 
 
 Continuando con $L(G) \subseteq \bigcup_i L(G_i)$. Sia $w \in L(G)$ ovvero $S \overset{*}{\Rightarrow_G}w$.

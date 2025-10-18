@@ -1,7 +1,6 @@
 ## AUT
 
-- [x] Appunti 10/10
-- [x] Appunti 15/10
+- [x] Done
 ## IUM
 
 - [ ] Appunti riassuntivi fino ad oggi 11/10
@@ -10,9 +9,8 @@
 - [ ] Appunti C + ultima lezione
 ## WEB
 
-- [x] Appunti API (@2025-10-11 16:33)
-- [ ] Appunti HiLo +  REST 14/10
-- [ ] Registrarsi per l'hw
+- [ ] Appunti REST
+- [ ] Registrarsi per l'hw (hold)
 ## ISW
 
 - [ ] Appunti riassuntivi fino ad oggi 11/10

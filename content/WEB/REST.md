@@ -5,4 +5,4 @@ tags:
 ---
 
 > [!info] Definizione: REST (Representational state transfer)
-> REST è uno stile -z
+> REST è uno stile ...
