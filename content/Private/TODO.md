@@ -1,16 +1,38 @@
-## AUT
+---
 
-- [x] Done
-## IUM
+kanban-plugin: board
 
-- [ ] Appunti riassuntivi fino ad oggi 11/10
-## PEM
+---
 
-- [ ] Appunti C + ultima lezione
-## WEB
+## TODO
 
-- [ ] Appunti REST
-- [ ] Registrarsi per l'hw (hold)
-## ISW
+- [ ] IUM - Appunti riassuntivi
+- [ ] ISW - Appunti riassuntivi
+- [ ] PEM - Appunti riassuntivi
+- [ ] WEB - REST
 
-- [ ] Appunti riassuntivi fino ad oggi 11/10
+
+## Working-on
+
+
+
+## Done
+
+
+
+## Ideas
+
+
+
+## Keep in Mind
+
+- [ ] Register to WEB platform
+
+
+
+
+%% kanban:settings
+```
+{"kanban-plugin":"board","list-collapse":[false,false,false,false,false]}
+```
+%%
