@@ -6,7 +6,6 @@ kanban-plugin: board
 
 ## TODO
 
-- [ ] IUM - Appunti riassuntivi
 - [ ] ISW - Appunti riassuntivi
 - [ ] PEM - Appunti riassuntivi
 - [ ] WEB - REST
@@ -18,6 +17,7 @@ kanban-plugin: board
 
 ## Done
 
+- [ ] IUM - Appunti riassuntivi
 
 
 ## Ideas
