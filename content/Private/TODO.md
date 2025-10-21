@@ -7,12 +7,12 @@ kanban-plugin: board
 ## TODO
 
 - [ ] ISW - Appunti riassuntivi
-- [ ] PEM - Appunti riassuntivi
 - [ ] WEB - REST
 
 
 ## Working-on
 
+- [ ] PEM - Appunti riassuntivi
 
 
 ## Done

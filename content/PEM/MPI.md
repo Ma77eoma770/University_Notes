@@ -4,28 +4,30 @@ date:
 tags:
   - PEM
 ---
-...type of parallelel systems
+## Concurrent vs. Parallel vs. Distributed
 
-Concurrent vs. Parallel vs. Distributed • There isn’t a complete agreement on the definition, but: • Concurrent: Multiple tasks can be in progress at any time 
-Parallel: Multiple tasks cooperate closely to solve a problem 
-Distributed: A program might need to cooperate with other programs to solve a problem 
+There isn’t a complete agreement on the definition, but: 
+- **Concurrent**: Multiple tasks can be in progress at any time 
+- **Parallel**: Multiple tasks cooperate closely to solve a problem 
+- **Distributed**: A program might need to cooperate with other programs to solve a problem 
 
-Parallel and distributed are concurrent • Concurrent programs can be serial (e.g., multitasking operating system running on a single core(interleaving))
-
-Parallel: tightly coupled (cores share the memory or are connected through a fast network)
-Distributed: more loosely coupled (e.g., servicesconnected through the Internet)
+> [!info] In detail:
+> 1. Parallel and distributed are concurrent 
+> 2. Concurrent programs can be serial (e.g., multitasking operating system running on a single core(interleaving))
+> 3. Parallel: tightly coupled (cores share the memory or are connected through a fast network)
+> 4. Distributed: more loosely coupled (e.g., services connected through the Internet)
 
 ## Know your hardware
+ 
+We want to write efficient code, in order to achieve this goal we need to know our hw and optimize for that configuration.
 
-Vogliamo scrivere codice efficente e quinid vogliamo conoscere l'hw dove stiamo per ppoi ottimizzare per quello. 
-
-### Architettura di Von Neumann
+### Von Neumann's Architecture
 
 ![[Pasted image 20251007174152.png|400]]
-classica architettura...
-• Main memory: Collection of locations. Each has an address (used to access that location) and some content (data or instruction). 
-• CPU/Processor/Core: Control unit (decides which instructions execute) and datapath (executes the instructions) – The state of an executing program is stored in registers (very fast storage) – An important register in the control unit is the program counter (PC), storing the address of the next instruction to execute 
-• Interconnect: used to transfer data between CPU and memory. Traditionally a bus, but can be much more complex (we will get back to it)
+
+• **Main memory**: Collection of locations. Each has an address (used to access that location) and some content (data or instruction). 
+• **CPU/Processor/Core**: Control unit (decides which instructions execute) and datapath (executes the instructions) – The state of an executing program is stored in registers (very fast storage) – An important register in the control unit is the program counter (PC), storing the address of the next instruction to execute 
+• **Interconnect**: used to transfer data between CPU and memory. Traditionally a bus, but can be much more complex (we will get back to it)
 
 > [!bug] The interconnect determines the rate at which data is transferred (Von Neumann Bottleneck)
 
@@ -33,12 +35,14 @@ classica architettura...
 
 ## MPI
 
-Riferito spesso come Single-Program Multiple-Data (SPMD) (Un programma compialto che viene eseguito da tutti i processi)
+Referred as a Single-Program Multiple-Data (SPMD) (compiled program executed by all processes)
 
 ![[Pasted image 20251007175022.png]]
 
-Se ho dei condizionali, splitto in più processi (se sono il processo x faro y se sono z faro k)
-Ricordiamo che non c'è memoria condivisa quindi la coordinazione avviene per message passing
+If there are conditionals, I split the work into multiple processes (for example, if I am process X, I will do Y; if I am process Z, I will do K).
+
+> [!hint] Note:
+> Remember that there is no shared memory, so coordination occurs through message passing.
 
 ```C
 #include <stdio.h> 
@@ -51,13 +55,12 @@ return 0;
 }
 ```
 
-- MPI_Init: dice a mpi di setuppare il tutto
+- MPI_Init: Tells to MPI to start and setup everything.
 
 ![[Pasted image 20251007175959.png]]
 
-- MPI_Finalize: dice che abbiamo finito ce di ripulire il tutto
+- MPI_Finalize: tells to clean everything and terminate (the MPI operations)
 ![[Pasted image 20251007180052.png]]
-
 
 > [!done] Return di entrambi sono int che se diversi da 0 significano errori con codici corrispondenti
 
@@ -125,3 +128,24 @@ Questo può capitare "grazie" allo scheduler.
 
 ![[Pasted image 20251007183032.png]]
 
+
+> [!warning]  Nonovertaking messages
+> MPI requires that messages be nonovertaking. This means that if process q sends two messages to process r, then the first message sent by q must be available to r before the second message. (However, there is no restriction on the arrival of messages sent from different processes)
+
+## DataType
+
+| MPI datatype       | C datatype           |
+| ------------------ | -------------------- |
+| MPI_CHAR           | signed char          |
+| MPI_SHORT          | signed short int     |
+| MPI_LONG           | signed long int      |
+| MPI_LONG_LONG      | signed long long int |
+| MPI_UNSIGNED_CHAR  | unsigned char        |
+| MPI_UNSIGNED_SHORT | unsigned short int   |
+| MPI_UNSIGNED       | unsigned int         |
+| MPI_UNSIGNED_LONG  | unsigned long        |
+| MPI_FLOAT          | float                |
+| MPI_DOUBLE         | double               |
+| MPI_LONG_DOUBLE    | long double          |
+| MPI_BYTE           |                      |
+| MPI_PACKED         |                      |
