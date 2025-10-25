@@ -6,17 +6,18 @@ kanban-plugin: board
 
 ## TODO
 
-- [ ] ISW - Appunti riassuntivi
 - [ ] PEM - Appunti riassuntivi (2.4.3)
+- [ ] ISW - Appunti riassuntivi
 
 
 ## Working-on
 
-- [ ] WEB - REST
+- [ ] AUT - Appunti 22/10
 
 
 ## Done
 
+- [ ] WEB - REST
 - [ ] IUM - Appunti riassuntivi
 
 
