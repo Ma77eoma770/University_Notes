@@ -175,7 +175,18 @@ w \in L(M) \Leftrightarrow S \overset{*}{\Rightarrow}w
 $$
 M su input w passa da $q_0$ a $q_{acc}$ con pila vuota $\Leftrightarrow S = Aq_0q_{acc} \overset{*}{\Rightarrow} w$ 
 
-**Dim Aff. 1**:
-	...
-**Dim Aff. 2**:
-	...
+**Dim Aff. 1** Per induzione se # passi per derivare x da Apq
+	- **Base**: # 1 passo. L'unica regola possibile per derivare x in 1 passo è $App \Rightarrow \epsilon$. Ovviamente $\epsilon$ porta M da p a p con pila vuota.
+	- **Passo Induttivo**: Sia vero per # passi $\le k, \ k \ge 1$. Assumo:
+	  $Apq \overset{*}{\Rightarrow} x$ in k + 1 passi. La prima sostituzione è (i) $Apq \Rightarrow aA_{rs}b$ oppure (ii) $Apq \Rightarrow A_{pr}A_{rq}$
+	  **(i)**: $x = ayb \ e \ A_{rs}\overset{*}{\Rightarrow}y$ in k passi; allora M può andare da r a s con pila vuota. Inoltre: $(r,u) \in \delta (p,a,\epsilon) \quad (q,\epsilon) \in \delta(s,b,u)$. M inizia in p con pila vuota legge a e inserisce u nella pila; passa da $r \Rightarrow s$ senza modificare la pila; poi fa `pop` di u e arriva in q con pila vuota.
+	  **(ii)**: $x = yz \ con \ A_{pr} \overset{*}{\Rightarrow} y \quad Arq \overset{*}{\Rightarrow} z$. Inoltre queste derivazioni hanno lunghezza $\le$ k e quindi portano M da p a r e da r a q con pila vuota $\Rightarrow$ M su x va da p a q con pila vuota.  
+
+**Dim Aff. 2** Per induzione sul numero di passi di M
+	- **Base**: # 0 passi significa che x = $\epsilon$. La grammatica ha regola $App \Rightarrow \epsilon$
+	- **Passo Induttivo**: Sia vero per x passi $\le k \ e \ k \ge 1$. Suppongo:
+	  M su x passi da p a q con pila vuota in k + 1 passi. Devo mostrare $Apq \overset{*}{\Rightarrow} x$. Due casi: (i) La pila vuota all'inizio o alla fine; (ii) Si svuota in mezzo.
+	  **(i)**: Nella prima mossa M fa `push` di $u \in T'$ e nell'ultima fa `pop`. Sia a il carattere letto nella prima mossa e b nell'ultima. Sia r lo stato dopo il primo stato e s il penultimo.
+	  $(r,u) \in \delta (q,a,\epsilon) \quad (q,\epsilon) \in \delta(s,b,u)$.
+	  Ma G(rammatica) contiene $Apq \Rightarrow aA_{rs}b$. Sia $x = ayb$; inoltre M va da r as s senza modificare la pila ovvero M su y può passare da r a s con pila vuota. Quanti passi da M su y? $k + 1 - 2 = k-1$. Pertanto $A_{rs}\overset{*}{\Rightarrow}y$ e dunque $Apq \overset{*}{\Rightarrow}x$
+	  **(ii)**: Sia r lo stato in cui la pila si svuota. La computazione di M da p ad r e da r ad s ha al più k passi. Sia $x = yz$ dove y corrisponde a $p \Rightarrow r$ e z a quella $r \Rightarrow s$. Per l'ipotesi induttiva: $Apr \overset{*}{\Rightarrow}y \ e \ A_{rq}\overset{*}{\Rightarrow}z \Rightarrow App \overset{*}{\Rightarrow} x$ 
