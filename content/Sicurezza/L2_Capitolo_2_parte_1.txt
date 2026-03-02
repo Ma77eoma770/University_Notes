@@ -1,0 +1,933 @@
+Sicurezza
+CdL in Informatica – L31
+Lezione 2 – Cryptographic Tools
+
+Prof. Emiliano Casalicchio
+Department of Computer Science
+Sapienza University of Rome
+
+Chapter 2
+Cryptographic Tools
+
+Topics
+•
+•
+•
+•
+•
+
+Confidentiality with symmentric encryotion
+Message authentication and hash functions
+Public key encryption
+Digital signature and key management
+Random and pseudorandom numbers
+
+Symmetric Encryption
+• The universal technique for providing confidentiality
+for transmitted or stored data
+• Also referred to as conventional encryption or singlekey encryption
+
+• Two requirements for secure use:
+• Need a strong encryption algorithm
+• Sender and receiver must have obtained copies
+of the secret key in a secure fashion and must
+keep the key secure
+
+Secret key shared by
+sender and recipient
+
+Secret key shared by
+sender and recipient
+
+K
+
+K
+Transmitted
+ciphertext
+
+X
+
+Y = E[K, X]
+Plaintext
+input
+
+Encryption algorithm
+(e.g., DES)
+
+X = D[K, Y]
+Decryption algorithm
+(reverse of encryption
+algorithm)
+
+Figure 2.1 Simplified Model of Symmetric Encryption
+
+Plaintext
+output
+
+Attacking Symmetric Encryption
+Cryptanalytic Attacks (cryptanalysis)
+
+⚫ Rely on:
+⚫ Nature of the algorithm
+⚫ Some knowledge of the general characteristics of the plaintext
+⚫ Some sample plaintext-ciphertext pairs
+
+⚫ Exploits the characteristics of the algorithm to attempt to
+deduce a specific plaintext or the key being used
+⚫ If successful all future and past messages encrypted with that key
+
+are compromised
+
+Attacking Symmetric Encryption
+Brute-Force Attacks
+
+⚫ Try all possible keys on some ciphertext until an intelligible
+translation into plaintext is obtained
+⚫ On average half of all possible keys must be tried to achieve
+
+success
+
+Data Encryption Standard (DES)
+• Until recently was the most widely used encryption
+scheme
+
+• Referred to as the Data Encryption Algorithm (DEA)
+• Uses 64 bit plaintext block and 56 bit key to produce a 64 bit ciphertext
+block
+
+• Strength concerns:
+• Concerns about the algorithm itself
+• DES is the most studied encryption algorithm in existence
+• Concerns about the use of a 56-bit key
+• The speed of commercial off-the-shelf processors makes this key length
+woefully inadequate
+
+Triple DES (3DES)
+⚫ Repeats basic DES algorithm three times using either two or
+
+three unique keys
+⚫ First standardized for use in financial applications in ANSI
+
+standard X9.17 in 1985
+⚫ Attractions:
+⚫
+
+168-bit key length overcomes the vulnerability to brute-force attack of DES
+
+⚫
+
+Underlying encryption algorithm is the same as in DES
+
+⚫ Drawbacks:
+Algorithm is sluggish in software
+⚫ Uses a 64-bit block size
+⚫
+
+Advanced Encryption Standard (AES)
+Needed a replacement
+for 3DES
+
+NIST called for
+proposals for a new
+AES in 1997
+
+Selected Rijndael in
+November 2001
+
+Should have a security strength
+equal to or better than 3DES
+
+3DES was not
+reasonable for long
+term use
+
+Significantly improved efficiency
+
+Symmetric block cipher
+
+Published as
+FIPS 197
+
+128 bit data and 128/192/256 bit
+keys
+
+https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf
+
+Comparison of Three Popular Symmetric
+Encryption Algorithms
+DES
+
+Triple DES
+
+AES
+
+Plaintext block size (bits)
+
+64
+
+64
+
+128
+
+Ciphertext block size (bits)
+
+64
+
+64
+
+128
+
+Key size (bits)
+
+56
+
+112 or 168
+
+128, 192, or 256
+
+DES = Data Encryption Standard
+AES = Advanced Encryption Standard
+
+Most commonly used symmetric encryption
+algorithms are block ciphers.
+A block cipher processes the plaintext input in fixedsize blocks and produces a block of ciphertext of equal
+size for each plaintext block
+
+Average Time Required for Exhaustive
+Key Search
+Key size
+(bits)
+56
+128
+168
+
+Cipher
+DES
+AES
+Triple DES
+
+Number of
+Alternative
+Keys
+
+Time Required at 109
+decryptions/s
+
+Time Required
+at 1013
+decryptions/s
+
+256 ≈ 7.2 ´ 1016
+
+255 ns = 1.125 years
+
+1 hour
+
+2128 ≈ 3.4 ´ 1038
+
+2127 ns = 5.3 ´ 1021
+years
+
+5.3 ´ 1017 years
+
+2168 ≈ 3.7 ´ 1050
+
+2167 ns = 5.8 ´ 1033
+years
+
+5.8 ´ 1029 years
+
+192
+
+AES
+
+2192 ≈ 6.3 ´ 1057 2191 ns = 9.8 ´ 1040
+years
+
+9.8 ´ 1036 years
+
+256
+
+AES
+
+2256 ≈ 1.2 ´ 1077 2255 ns = 1.8 ´ 1060
+years
+
+1.8 ´ 1056 years
+
+Notes
+All the numbers in the previous table depends on decryption/s (methods
+and processor speed)
+Today we talk about quantum-resistant cryptographic algorithms
+(usually public-key algorithms)
+
+1. To be secure against a cryptanalytic attack by a quantum
+computer.
+2. PK rely on the difficulty of one of three mathematical problems:
+the integer factorization problem, the discrete logarithm
+problem or the elliptic-curve discrete logarithm problem
+3. QC can easily solved this problems
+
+Practical Security Issues
+⚫ Typically symmetric encryption is applied to a unit of data
+
+larger than a single 64-bit or 128-bit block
+⚫ Electronic codebook (ECB) mode is the simplest approach to
+multiple-block encryption
+⚫ Each block of plaintext is encrypted using the same key
+
+Decryption
+
+Encryption
+
+P1
+
+P2
+
+b
+
+K
+
+Encrypt
+b
+
+b
+
+K
+
+Encrypt
+b
+
+b
+
+K
+
+Encrypt
+b
+
+C1
+
+C2
+
+Cn
+
+C1
+
+C2
+
+Cn
+
+b
+
+K
+
+Pn
+
+Decrypt
+b
+
+P1
+
+b
+
+K
+
+Decrypt
+b
+
+P2
+
+b
+
+K
+
+Decrypt
+b
+
+P
+
+n
+A cryptanalyst
+may exploit regularities in the
+plaintext. For example, if it is known that the
+message always starts out with certain
+predefined fields, then the cryptanalyst may
+(a) Block cipher encryption (electronic codebook mode)have a number of known plaintext-ciphertext
+pairs with which to work.
+
+Practical Security Issues (cont’d)
+⚫ Modes of operation
+⚫ Alternative techniques developed to increase the security of symmetric block
+
+encryption for large sequences
+⚫ Overcomes the weaknesses of ECB
+
+Types of Symmetric Encryption
+• Block cipher encryption (de-)
+• Stream cipher encryption (de-)
+
+(a) Block cipher encryption (electronic codebook mode)
+
+Key
+K
+
+Key
+K
+
+Pseudorandom byte
+generator
+(key stream generator)
+
+Pseudorandom byte
+generator
+(key stream generator)
+
+k
+Plaintext
+byte stream
+M
+
+ENCRYPTION
+
+k
+Ciphertext
+byte stream
+C
+
+(b) Stream encryption
+
+DECRYPTION
+
+Plaintext
+byte stream
+M
+
+Block & Stream Ciphers
+Block Cipher
+• Processes the input one block of elements at a time
+• Produces an output block for each input block
+• Can reuse keys
+• More common
+
+Stream Cipher
+• Processes the input elements continuously
+• Produces output one element at a time
+• Primary advantage is that they are almost always faster and use far
+less code
+• Encrypts plaintext one byte at a time
+• Pseudorandom stream is one that is unpredictable without
+knowledge of the input key
+
+• Encryption protect against passive attacks
+(eavesdropping)
+• How to protect against active attacks (falsification
+of data and transactions) ?
+
+Message Authentication
+Protects against
+active attacks
+Verifies received
+message is authentic
+
+• Contents have not been
+altered
+• From authentic source
+• Timely and in correct sequence
+
+Can use conventional • Only sender and receiver share
+a key
+encryption
+
+Message authentication
+• Without confidentiality
+o The message is authenticated but not encrypted
+o A message tag (authentication tag) is produced and added to the message
+
+• With confidentiality
+o The message is authenticated and encrypted
+o The message and the auth tag are encrypted
+
+• Typically message authentication is provided as a separate
+function from message encryption
+
+Message Authentication Without
+Confidentiality
+• Situations in which message authentication without
+confidentiality may be preferable include:
+o Applications in which the same message is broadcast to a number of
+destinations
+o An exchange in which one side has a heavy load and cannot afford
+the time to decrypt all incoming messages
+o Authentication of a computer program in plaintext is an attractive
+service
+
+• Thus, there is a place for both authentication and encryption
+in meeting security requirements
+
+Message Authentication Code
+Message
+
+MAC: Message
+Authentication Code
+
+K
+
+K: Secret Key e.g. shared
+between A and B
+Transmit
+
+MAC
+algorithm
+
+MACM F(KAB, M).
+
+Compare
+
+MAC
+algorithm
+MAC
+K
+
+MAC: Assumtpion and Assurance
+• Assumption:
+o Only the receiver and the sender know the identity of the secret key
+
+• Receiver’s Assurance (if the calculated code matches)
+o the message has not been altered. If an attacker alters the message but does not alter the code,
+then the receiver’s calculation of the code will differ from the received code. Because the
+assumption, the attacker cannot alter the code
+o the message is from the alleged sender. Because the assumption, no one else knows the secret
+key, no one else could prepare a message with a proper code
+o If the message includes a sequence number (such as is used with X.25, HDLC, and TCP), then the
+receiver can be assured of the proper sequence, because an attacker cannot successfully alter the
+sequence number
+
+One-Way Hash Functions
+• Alternative to MAC
+• Does not require an input key
+o accepts a variable-size message M as input and produces a fixed-size message digest
+H(M) as output
+
+Figure 2.4 Cryptographic Hash Function; h = H(M)
+
+• The message is padded out
+to an integer multiple of
+some fixed length (e.g.,
+1024 bits)
+• The padding includes the
+value of the length of the
+original message in bits
+• The length field is a security
+measure to increase the
+difficulty for an attacker to
+produce an alternative
+message with the same
+hash value
+casalicchio@di.uniroma1.it
+
+28
+
+Message Auth using one-way Hash function +
+Symmetric Encryption
+
+H
+
+Message
+
+Destination B
+
+Message
+
+Message
+
+Source A
+
+H
+
+K
+
+K
+
+E
+
+D
+
+(a) Using symmetric encryption
+
+Compare
+
+H
+
+K
+
+K
+
+E
+
+D
+
+H
+
+Message
+
+Publick
+Encryption
+(a) UsingKey
+symmetric
+encryption
+Message
+
+Message
+
+Message Auth using one-way Hash function +
+
+H
+
+PRa
+
+PUa
+
+E
+
+D
+
+Compare
+
+(b) Using public-key encryption
+K
+
+K
+
+Message
+
+Message
+
+Message
+
+• It provides a digital signature as well as message authentication
+• it does not require the distribution of keys to communicating parties.
+H
+
+H
+
+PRa
+
+PUa
+
+E
+
+D
+
+Compare
+
+Message Auth using one-way Hash function +
+Secret(b)Value
+(no encryption)
+Using public-key
+encryption
+Message
+
+K
+
+Message
+
+Message
+
+K
+
+K
+
+K
+
+H
+
+H
+
+Compare
+
+(c) Using secret value
+
+•
+•
+•
+•
+
+Encryption software
+quiteAuthentication
+slow
+Figure 2.5 isMessage
+Using a One-Way Hash Function.
+Encryption hardware costs are non-negligible
+Sender: computes MDM = H(K ll M ll K); sends [ MDM || M ]
+Receiver: knows K; recompute H(K ll M ll K); verify MDM
+
+Properties of a secure hash function H
+
+Strong Hash Function
+
+Weak Hash Function
+
+1. Can be applied to a block of data of any size
+2. Produces a fixed-length output
+3. H(x) is relatively easy to compute for any given x, making both
+hardware and software implementations practical
+4. Is One-way or preimage resistant
+o
+
+For any given code h, it is computationally infeasible to find x such that
+H(x)=h
+
+5. Is Second preimage of Weak Collision resistant
+o
+
+For any given block x, it is computationally infeasible to find y ≠ x with
+H(y)=H(x).
+
+6. Is strong collision resistant
+o
+
+It is computationally infeasible to find any pair (x, y) such that H(x) = H(y).
+
+One-way / preimage resistant
+• If is easy to find x=H-1(h) a schema like Message Auth with secret value
+can be broken as follow
+• The attacker
+o can observe or intercept a transmission
+o obtains the message M and the hash code MD M = H(K || M || K)
+o Inverts the hash function K || M || K = H-1(MDM)
+o Easy to compute K because it knows M
+
+Weak collision / second preimage resistant
+• This prevents forgery when an encrypted hash code is used
+o E.g. Message Auth with Private or Public Encryption
+
+• If the hash is not weak collision resistant the attacker can
+
+1. observe or intercept a message plus its encrypted hash code
+2. generate an unencrypted hash code from the message
+3. generate an alternate message with the same hash code
+
+Strong collision resistant
+• It protects against the following kind of attacks
+
+1. Bob sends Alice a message to pay a small amount of money
+2. Alice signs the document (acknowledge the message)
+3. Bob finds two messages with the same hash, one of which requires
+Alice to pay a small amount and one that requires a large
+payment.
+4. Alice signed the first message and Bob is then able to claim that
+the second message is authentic
+
+Security of Hash Functions
+There are two
+approaches to
+attacking a secure
+hash function:
+
+SHA most widely
+used hash algorithm
+
+Additional secure
+hash function
+applications:
+
+Cryptanalysis
+
+Passwords
+
+• Exploit logical weaknesses in
+the algorithm
+
+• Hash of a password
+is stored by an
+operating system
+
+Brute-force attack
+• Strength of hash function depends
+solely on the length of the hash code
+produced by the algorithm
+
+Intrusion detection
+• Store H(F) for each file
+on a system and
+secure the hash
+values
+
+Public-Key Encryption
+Structure
+Asymmetric
+
+Publicly
+proposed by
+Diffie and
+Hellman in
+1976
+
+Based on
+mathematical
+functions
+
+• Uses two
+separate keys
+• Public key
+and private
+key
+• Public key is
+made public
+for others to
+use
+
+Some form of
+protocol is
+needed for
+distribution
+
+Oriented toward providing Confidentiality
+
+Bob
+
+(a) Encryption with public key
+
+Alice
+
+Alice's
+public key
+ring
+Joy
+Bob
+PUb
+
+Bob's private
+key
+
+⚫ Anyone who knows the
+
+Bob's public
+key
+X=
+D[PUb, Y]
+
+Transmitted
+ciphertext
+
+X
+
+her own private key
+
+Ted
+Mike
+
+PRb
+
+⚫ User encrypts data using his or
+
+⚫ What can we get from this use
+
+Y = E[PRb, X]
+Plaintext
+input
+
+Encryption algorithm
+(e.g., RSA)
+Bob
+
+corresponding public key will be
+able to decrypt the message
+
+Decryption algorithm
+
+(b) Encryption with private key
+
+Figure 2.6 Public-Key Cryptography
+
+Alice
+
+Plaintext
+output
+
+of Public-key Encryption?
+⚫ Authentication or data
+integrity
+
+Asymmetric Encryption Algorithms
+• RSA (Rivest, Shamir, Adleman), 1977
+o Most widely accepted and implemented approach to public-key encryption
+o Block cipher in which the plaintext and ciphertext are integers between 0 and n-1 for some n
+
+• Diffie-Hellman key exchange algorithm 1976
+o Enables two users to generate a shared secret that can be used as a secret key for subsequent
+symmetric encryption of messages
+o Limited to the exchange of the keys
+
+• Digital Signature Standard (DSS)
+o Provides only a digital signature function with SHA-1
+o Cannot be used for encryption or key exchange
+
+• Elliptic curve cryptography (ECC)
+o Security like RSA, but with much smaller keys
+
+casalicchio@di.uniroma1.it
+
+40
+
+Applications for Public-Key Cryptosystems
+
+public-key cryptosystems categories
+
+Algorithm
+
+Digital Signature
+
+Symmetric Key
+Distribution
+
+Encryption of
+Secret Keys
+
+RSA
+
+Yes
+
+Yes
+
+Yes
+
+Diffie-Hellman
+
+No
+
+Yes
+
+No
+
+DSS
+
+Yes
+
+No
+
+No
+
+Elliptic Curve
+
+Yes
+
+Yes
+
+Yes
+
+Requirements public key cryptography [Diffie
+and Helman 1976]
+• Computationally easy for a party B to generate PUB, PRB
+• Computationally easy for a sender A knowing M and PUB to generate C=E(PUB,M)
+• Computationally easy for the receiver to decrypt: M=D(PRB,C)=(PRB, E(PUB,M))
+• Computational infeasible for an opponent knowing PUB to determine PRB
+• Computational infeasible for an opponent knowing PUB and C to recover M
+• Both PR and PU can be used for encryption/decryption (useful but not necessary)
+• M= D[PUB,E(PRB,M)] = D[PRB,E(PUB,M)]
+
+casalicchio@di.uniroma1.it
+
+42
+
+
