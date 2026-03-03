@@ -8,6 +8,8 @@
 2. [[IUM/Index|Interazione Uomo-Macchina]]
 3. [[WEB/Index|Programmazione Web]]
 4. [[PEM/Index|Progettazione di sistemi multicore]] 
+5. [[Sicurezza/Index|Sicurezza]]
+6. [[IA/Index|Intelligenza Artificiale]]
 
 ![[student-studying.gif]]
 

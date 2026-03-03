@@ -15,3 +15,8 @@ tags:
 
 ![[Firme Digitali]]
 
+![[Certificati a Chiave Pubblica (X.509)]]
+
+![[Busta Digitale (Digital Envelope)]]
+
+![[Numeri Casuali e Pseudocasuali]]
