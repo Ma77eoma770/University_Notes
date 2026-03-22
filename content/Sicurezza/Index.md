@@ -22,3 +22,12 @@ tags:
 	13. [[Block Cipher Modes of Operation]]
 	14. [[Criptoanalisi e Attacchi]]
 	15. [[Distribuzione delle Chiavi]]
+
+
+Others:
+1. [[XSalsa20-Poly1305]]
+2. [[Fernet]]
+3. [[Fernet vs. XSalsa20-Poly1305]]
+4. [[HKDF-SHA256]]
+5. [[Argon2Id]]
+6. [[Curve25519]]
