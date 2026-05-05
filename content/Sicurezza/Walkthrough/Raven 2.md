@@ -2,7 +2,7 @@
 date: 2026-04-06
 IP: 192.168.0.41
 Difficulty: Medium
-Done: false
+Done: true
 ---
 # Recon
 
