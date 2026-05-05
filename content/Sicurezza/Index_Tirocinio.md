@@ -29,7 +29,7 @@ Da [[Fernet]] (AES-CBC) a PyNaCl ([[XSalsa20-Poly1305]])
 
 ```python
 # crypto_service_old.py
-def cifra_vault(dinizionario, master_key):
+def cifra_vault(dizionario, master_key):
     json_data = json.dumps(dinizionario)
     f = Fernet(master_key)
     blob_cifrato = f.encrypt(json_data.encode())
@@ -51,9 +51,7 @@ def cifra_vault(dizionario: dict, master_key) -> str:
 
 **Cos'è cambiato**: L'architettura abbandona un cifrario a blocchi obsoleto e dipendente da imbottitura (padding) in favore di un cifrario di flusso moderno. Invece di delegare interamente la generazione della "busta" formattata a Fernet, la nuova implementazione gestisce esplicitamente il nonce (un numero monouso di 24 byte) concatenandolo al testo cifrato generato da SecretBox.
 
-**Evidenze dai Benchmark**: I dati confermano una netta superiorità della nuova libreria. La cifratura del Vault scende da 15.88 ms a 9.21 ms, mentre la decifratura si riduce quasi della metà (da 6.18 ms a 3.54 ms). Le dimensioni in output rimangono equivalenti (118.16 KB vs 118.13 KB), mentre i picchi di RAM sono comparabili ma leggermente ottimizzati in fase di scrittura (534.01 KB contro 773.31 KB).
-
-**Risultato Ottenuto**: Un incremento prestazionale del ~40% nelle operazioni di I/O del database crittografato, essenziale in un contesto dove il vault viene continuamente decifrato, mutato (es. aggiunta di nuove chiavi) e ricifrato. Esecuzione in constant-time svincolata dalle istruzioni hardware del processore (come AES-NI), limitando drasticamente i vettori per attacchi timing.
+**Risultato Ottenuto**: Un incremento prestazionale del ~40% nelle operazioni di I/O del database crittografato, essenziale in un contesto dove il vault viene continuamente decifrato, mutato (es. aggiunta di nuove chiavi) e ricifrato. A differenza di AES, che richiede il supporto hardware specifico (come le istruzioni AES-NI) per essere eseguito in constant-time ed evitare attacchi side-channel (cache-timing), XSalsa20 è stato progettato esplicitamente per le architetture software. Garantisce nativamente l'immunità agli attacchi timing anche su hardware modesto (come vecchi smartphone o sistemi embedded), senza dipendere dai set di istruzioni del processore.
 
 **Fondamento Teorico**: AES è un cifrario a blocchi da 16 byte. Qualsiasi payload non divisibile per 16 richiede l'aggiunta di padding, generando un overhead operativo. XSalsa20 opera manipolando bit per bit, allineando l'output esattamente alla lunghezza dell'input. L'utilizzo di un nonce esteso a 192 bit (24 byte) abbassa le probabilità di collisione a soglie trascurabili, rendendo sicura la generazione tramite `os.urandom`.
 
@@ -75,18 +73,45 @@ def cifra_con_age(plaintext: str | bytes, public_keys: list):
     return base64.b64encode(result.stdout).decode()
 ```
 
-**Com'è adesso**: Implementazione pura di una "Digital Envelope" asimmetrica/simmetrica. Generazione di una coppia di chiavi effimere X25519, scambio chiave ([[Curve25519|ECDH]]), derivazione della Master Message Key via [[HKDF-SHA256|HKDF]] e cifratura finale in formato JSON (v3).
+**Com'è adesso**: Implementazione avanzata di una "Digital Envelope" ibrida (asimmetrica/simmetrica) che garantisce la _Sender Forward Secrecy_ a livello di singolo messaggio. L'architettura si basa su una combinazione tra chiavi d'identità a lungo termine (conservate nel Vault) e chiavi effimere generate dinamicamente ad ogni invio.
+
+Nello specifico, il flusso di cifratura (Envelope v3) avviene in queste fasi per ogni singolo messaggio:
+
+1. **Generazione Effimera e MMK**: Il client mittente genera "al volo" una nuova coppia di chiavi X25519 "usa-e-getta" e crea una _Master Message Key_ (MMK) crittograficamente forte.
+2. **Key Agreement ([[Curve25519|ECDH]])**: Sfruttando le proprietà di omomorfismo della Curva Ellittica Diffie-Hellman, il mittente calcola uno _Shared Secret_ moltiplicando la propria _Chiave Privata Effimera_ neo-generata con la _Chiave Pubblica a lungo termine_ del destinatario. L'assunto matematico di base di ECDH garantisce che il destinatario potrà ricavare lo stesso identico segreto invertendo i fattori (moltiplicando la sua Privata a lungo termine per l'Effimera appena ricevuta), il tutto senza che alcuna chiave privata transiti mai in rete.
+3. **Derivazione Chiave (KDF) e Wrapping**: Il Segreto Condiviso appena calcolato viene passato a una funzione [[HKDF-SHA256|HKDF]] per derivare una chiave di cifratura robusta (DEK - _Data Encryption Key_). Questa DEK viene quindi utilizzata per "chiudere il lucchetto" attorno alla Master Message Key (MMK), cifrandola in modo sicuro tramite `NaCl SecretBox`.
+4. **Cifratura del Payload e Terminazione**: La MMK in chiaro cifra il contenuto reale del messaggio ([[XSalsa20-Poly1305]]). Il payload cifrato, la MMK cifrata e la Chiave Pubblica Effimera vengono impacchettati nell'Envelope JSON (v3) e inviati. Immediatamente dopo, la Chiave Privata Effimera del mittente viene distrutta in modo permanente dalla memoria.
 
 ```python
 # crypto_service.py
 def _encrypt_mmk_for_recipients(mmk: bytes, ephemeral_priv: X25519PrivateKey, public_keys: list) -> list[str]:
     encrypted_deks = []
+    
     for pk_b64 in public_keys:
+        # Recupera la chiave pubblica statica (a lungo termine) del destinatario
         pub_key = X25519PublicKey.from_public_bytes(base64.b64decode(pk_b64))
+        
+        # KEY AGREEMENT: Privata Effimera * Pubblica Statica = Shared Secret
         shared_key = ephemeral_priv.exchange(pub_key)
-        derived_dek = HKDF(algorithm=hashes.SHA256(), length=32, salt=None,                            info=b"ChatControl...").derive(shared_key)
+        
+        # HKDF: Deriva la Data Encryption Key (DEK) dal segreto condiviso
+        derived_dek = HKDF(
+            algorithm=hashes.SHA256(), 
+            length=32, 
+            salt=None,                            
+            info=b"ChatControl Message DEK HKDF"
+        ).derive(shared_key)
+        
+        # WRAPPING: Usa la DEK per cifrare la Master Message Key (MMK)
         dek_box = nacl.secret.SecretBox(derived_dek)
-        # ... cifratura MMK e append
+        nonce_dek = nacl.utils.random(nacl.secret.SecretBox.NONCE_SIZE)
+        enc_mmk = dek_box.encrypt(mmk, nonce_dek)
+        
+        # Salva la MMK crittografata (lucchetto chiuso)
+        encrypted_deks.append(base64.b64encode(nonce_dek +                                enc_mmk.ciphertext).decode('utf-8'))
+        
+    return encrypted_deks
+
 ```
 
 **Cos'è cambiato**: Completa rimozione delle chiamate a processi di sistema in favore della libreria crittografica cryptography. Il sistema genera una singola Master Message Key (MMK) per il messaggio, per poi distribuire questa MMK in copie distinte, ognuna cifrata crittograficamente in modo univoco per la chiave pubblica di ogni specifico destinatario.
@@ -136,6 +161,65 @@ async def decifra_payload_stream(async_iterator, candidate_privates: list):
 
 **Risultato Ottenuto**: La piattaforma è ora virtualmente illimitata nella grandezza dei payload gestibili, proteggendo il backend da out-of-memory (OOM) o saturazione della RAM anche elaborando gigabyte di media in contemporanea. Alleggerimento della ram e in generale del sistema (specialmente per low-memory o embedded systems). Difficoltà di tracciamento o re-try. In un approccio streaming, se il trasferimento asincrono fallisce a metà (TCP Socket rotto), il file parzialmente scaricato non sarà integro, e si perde il lusso di poter validare crittograficamente un pacchetto per intero prima di passarlo al layer applicativo.
 
-**Fondamento Teorico**: Per confermare la validità del payload in Fernet o in sistemi a blocco puro in modalità CBC accoppiati ad un HMAC, è necessario processare iterativamente l'intero ciphertext, tenere il computo del tag in memoria, validarlo e solo dopo concedere la decifratura (Encrypt-then-MAC). Sfruttando XSalsa20 unito a Poly1305 in modalità stream, ogni "chunk" possiede implicitamente un proprio blocco matematico autenticato, autorizzando lo script a validare e riversare byte in uscita scartando dal buffer quelli già gestiti, azzerando l'accumulo di memoria RAM. (XSalsa20 streaming cypher mentre Poly1305 no).
+## Tests
 
-![[ChatControl_Prima.png]]![[ChatControl_Dopo.png]]
+--- TEST FERNET (AES-CBC) ---
+Cifratura   : 4.36 ms | Picco RAM: 773.27 KB | Size Output: 118.16 KB
+Decifratura : 1.72 ms | Picco RAM: 443.72 KB
+
+--- TEST PYNACL (SecretBox XSalsa20) ---
+Cifratura   : 3.26 ms | Picco RAM: 534.01 KB | Size Output: 118.13 KB
+Decifratura : 1.53 ms | Picco RAM: 622.11 KB
+
+---
+
+--- [Test File from 1 MB] ---
+[1MB] Testing Legacy V3 Memory Approach...
+ -> V3 Encrypt:   7.18 ms | RAM Peak:   8.34 MB
+ -> V3 Decrypt:   4.86 ms | RAM Peak:   9.23 MB
+[1MB] Testing New V1 Stream Approach...
+ -> V1 Encrypt:   1.74 ms | RAM Peak:   5.25 MB
+ -> V1 Decrypt:   1.82 ms | RAM Peak:   3.38 MB
+
+--- [Test File from 5 MB] ---
+[5MB] Testing Legacy V3 Memory Approach...
+ -> V3 Encrypt:  32.78 ms | RAM Peak:  41.67 MB
+ -> V3 Decrypt:  26.03 ms | RAM Peak:  46.11 MB
+[5MB] Testing New V1 Stream Approach...
+ -> V1 Encrypt:   6.21 ms | RAM Peak:   7.25 MB
+ -> V1 Decrypt:   7.07 ms | RAM Peak:   7.26 MB
+
+--- [Test File from 25 MB] ---
+[25MB] Testing Legacy V3 Memory Approach...
+ -> V3 Encrypt: 180.21 ms | RAM Peak: 208.34 MB
+ -> V3 Decrypt: 135.16 ms | RAM Peak: 230.56 MB
+[25MB] Testing New V1 Stream Approach...
+ -> V1 Encrypt:  31.07 ms | RAM Peak:   7.25 MB
+ -> V1 Decrypt:  30.99 ms | RAM Peak:   7.26 MB
+ 
+ ---
+
+## Sviluppi Futuri e Roadmap Architetturale
+
+### L'Architettura di Transizione Attuale
+
+L'attuale implementazione della _Envelope Encryption_ asimmetrica-simmetrica (con _Sender Forward Secrecy_) è una soluzione architetturale non convenzionale. Questa "atipicità" è voluta: rappresenta la fase di transizione (il ponte logico) per traghettare la piattaforma dalle limitazioni legacy introdotte dal binario `age`, verso un sistema più complesso. Abbiamo solidificato le primitive crittografiche (Curve25519, HKDF, XSalsa20), svincolandole dai binari di sistema e preparandole a inserirsi nel prossimo step del Double Ratchet.
+
+### Implementazione del Double Ratchet (1-a-1)
+
+L'obiettivo primario del prossimo ciclo di sviluppo è colmare il divario architetturale dal modello attuale verso un vero e proprio **Double Ratchet**, sul modello del Signal Protocol. Per procedere l'infrastruttura dovrà:
+
+- Integrare un protocollo di iniziazione **X3DH** (Extended Triple Diffie-Hellman), permettendo ai client di scambiarsi _PreKeys_ in modalità asincrona tramite il backend, senza la necessità che entrambi gli utenti siano online.
+- Sostituire l'uso di chiavi effimere isolate per-messaggio con vere e proprie **Chain Keys** derivate continuamente (KDF Ratchet).
+- In un vero e proprio Double Ratchet la difficoltà maggiore rimane quella di gestire out-of-order packet o più generalmente per il problema delle *skipped keys*. Abbiamo deciso che per ora non vogliamo affrontare questa parte per favorire, invece, altri rami di sviluppo.
+
+### Il Paradigma dei Gruppi (Da O(N) a O(1))
+
+Il protocollo Double Ratchet nativo è intrinsecamente progettato per comunicazioni _P2P (1-to-1)_. Attualmente, l'invio nei gruppi in ChatControl scala linearmente in **O(N)** (dove N è il numero dei partecipanti al gruppo per cui dobbiamo calcolare separatamente l'ECDH per cifrare la singola MMK). Estendere il Double Ratchet puro nei gruppi risulterebbe in un overhead quadratico ingestibile e tempi di esecuzione inaccettabili. Lo sviluppo futuro prevede di risolvere questo collo di bottiglia introducendo un approccio **Sender Keys**. Questo permetterà di crittare il payload per il gruppo in tempo costante **O(1)**, negoziando la chiave di root solo all'entrata o all'uscita di un componente, mantenendo al contempo le proprietà di _Post-Compromise Security_.
+
+### 4. Traffic Obfuscation, Padding e Deep Packet Inspection (DPI)
+
+L'ultimo obiettivo in roadmap esplora la protezione dal censimento del traffico di rete (Traffic Analysis) tramite algoritmi di _Padding_ sui pacchetti di rete. Sebbene i contenuti siano matematicamente inaccessibili, la dimensione e il timing dei pacchetti possono rivelare l'impronta di un'applicazione a Firewall governativi e sistemi di **Deep Packet Inspection (DPI)**. Nello scenario di ChatControl esistono due facce della medaglia riguardo questa funzionalità (dipendenti esclusivamente dal threat model che vogliamo considerare):
+
+- **Scenario inutile:** L'applicazione attualmente viaggia trasportata dalle di primitive di rete di Telegram (utilizzando l'infrastruttura MTProto sottostante). Pertanto, un ISP che attua ispezione DPI vedrà solamente "Normale traffico Telegram". Aggiungere un livello di padding al nostro payload cifrato non muterebbe l'apparenza del pacchetto rispetto ai firewall ISP esterni, rappresentando un costo computazionale inutile.
+- **Scenario possibile (un po' paranoico):** Il Padding diventa al contrario utile se il nostro threat-model considera Telegram stesso (e i server ospitanti) come l'avversario che esegue analisi DPI. Offuscare le dimensioni del payload previene attacchi di inferenza lato-server, dove Telegram — pur non potendo leggere i messaggi — potrebbe dedurre comportamenti, flussi media o l'identità dell'interlocutore (Fingerprinting) basandosi esclusivamente sullo studio statistico delle dimensioni dei byte (le lunghezze dei ciphertext di XSalsa20 sono identiche a quelle del plaintext introdotto).

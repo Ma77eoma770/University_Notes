@@ -15,4 +15,4 @@ AES è notoriamente difficile da implementare in software in modo sicuro, perch�
 
 ## Per una mole più grande di dati...
 
-La modalità CBC (usata da Fernet) richiede che ogni blocco sia concatenato al precedente. Inoltre, l'HMAC di Fernet richiede di leggere l'intero file per validare la firma. Se hai un video da 1GB, Fernet ti costringe a riempire 1GB di RAM. Con XSalsa20-Poly1305 (come avete fatto nel CCV3) puoi fare il _chunking_: spezzi il video in pezzettini da 1MB, ognuno col suo mini-tag Poly1305, e li decifri al volo in streaming asincrono consumando solo 1MB di RAM alla volta.
+La modalità CBC (usata da Fernet) richiede che ogni blocco sia concatenato al precedente. Inoltre, l'HMAC di Fernet richiede di leggere l'intero file per validare la firma. Se hai un video da 1GB, Fernet ti costringe a riempire 1GB di RAM. Con XSalsa20-Poly1305 puoi fare il _chunking_: spezzi il video in pezzettini da 1MB, ognuno col suo mini-tag Poly1305, e li decifri al volo in streaming asincrono consumando solo 1MB di RAM alla volta.
