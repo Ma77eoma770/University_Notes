@@ -16,7 +16,10 @@
 
 ## Primo anno
 
-1. [Magistrale/CRY/index.md]
+1. [[Index_CRY| Cryptography]]
+2. [[Index_CV| Computer Vision]]
+3. [[Index_DSYS| Distributed Systems]]
+4. [[Index_FDS| Foundation of Data Science]]
 
 
 ![[student-studying.gif]]
