@@ -1,7 +1,14 @@
 ---
-title: "Generazione Avversaria di Grafi Dinamici per la Difesa Attiva tramite Tabular Q-Learning"
-tags: [ "#formalizzazione", "#architettura", "#reinforcement-learning", "#q-learning", "#difesa-attiva", "#pomdp", "#game-theory" ]
-date: "2026-07-27"
+title: Generazione Avversaria di Grafi Dinamici per la Difesa Attiva tramite Tabular Q-Learning
+tags:
+  - "#formalizzazione"
+  - "#architettura"
+  - "#reinforcement-learning"
+  - "#q-learning"
+  - "#difesa-attiva"
+  - "#pomdp"
+  - "#game-theory"
+date: 2026-07-27
 version: "2.0"
 ---
 

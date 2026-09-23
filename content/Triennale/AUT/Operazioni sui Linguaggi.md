@@ -8,7 +8,7 @@ tags:
 ## Operazioni
 
 Fissiamo $\Sigma = \{ 0,1\}$. Per $n \in \mathbb{N}, \ [u] = \{1,2,...,n\}$.
-Siccome i [[linguaggi regolari]] sono un insieme di stringhe posso considerare su di essi operazioni.
+Siccome i [[Linguaggi regolari]] sono un insieme di stringhe posso considerare su di essi operazioni.
 
 - **Unione**: $L_1 \cup L_2 = \{ x \in \Sigma^* \ | \ x \in L_1 \ oppure \ x \in L_2 \}$
 - **Intersezione**: $L_1 \cap L_2 = \{ x \in \Sigma^* \ | \ x \in L_1 \ e \ x \in L_2 \}$

@@ -1,15 +1,23 @@
-## Secondo anno 
+## Triennale
+### Secondo anno 
 
-1. [[RDE/Index|Reti Degli Elaboratori]]
+1. [[Triennale/RDE/Index|Reti Degli Elaboratori]]
 
-## Terzo anno
+### Terzo anno
 
-1. [[AUT/Index|Automi, Calcolabilita, Complessita]]
-2. [[IUM/Index|Interazione Uomo-Macchina]]
-3. [[WEB/Index|Programmazione Web]]
-4. [[PEM/Index|Progettazione di sistemi multicore]] 
-5. [[Sicurezza/Index|Sicurezza]]
-6. [[IA/Index|Intelligenza Artificiale]]
+1. [[Triennale/AUT/Index|Automi, Calcolabilita, Complessita]]
+2. [[Triennale/IUM/Index|Interazione Uomo-Macchina]]
+3. [[Triennale/WEB/Index|Programmazione Web]]
+4. [[Triennale/PEM/Index|Progettazione di sistemi multicore]] 
+5. [[Triennale/SIC/Index|Sicurezza]]
+6. [[Triennale/IA/Index|Intelligenza Artificiale]]
+
+## Magistrale
+
+## Primo anno
+
+1. [Magistrale/CRY/index.md]
+
 
 ![[student-studying.gif]]
 
