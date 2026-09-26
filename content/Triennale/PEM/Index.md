@@ -5,5 +5,5 @@ tags:
   - PEM
   - Index
 ---
-1. [[Intro]]
+1. [[Triennale/PEM/Intro]]
 2. [[MPI]]

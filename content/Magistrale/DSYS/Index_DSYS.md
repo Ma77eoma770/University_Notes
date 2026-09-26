@@ -24,3 +24,13 @@ SORT date ASC
 - [ ]
 - [ ]
 - [ ]
+
+november 9-16 no class
+
+## Exam
+
+- Midterm - November
+	- Written exercise (more theorical 1st part)
+- Final - Jan
+	- written (more practical 2nd part)
+

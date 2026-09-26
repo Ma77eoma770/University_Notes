@@ -1,13 +1,13 @@
 ---
-Class:
+Class: Foundation of Data Science
 Professor Name:
   - Cinelli Matteo
   - Spinelli Indro
-Site: "?"
+Site: Classroom
 Professor Mail:
   - matteo.cinelli@uniroma1.it
   - indro.spinelli@uniroma1.it
-Difficulty: "?"
+Difficulty: Hard
 A.T.: "1.1"
 tags:
   - Index
@@ -25,6 +25,8 @@ SORT date ASC
 
 # Scadenze
 
-- [ ]
+- [ ] ⏳ 2026-10-23 2026-11-09 Challenge
+- [ ] ⏳ 2026-11-09 2026-12-15 Final Project
+- [ ] ⏳ 2026-12-23 Finale Report & Code
 - [ ]
 - [ ]
