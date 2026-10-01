@@ -5,32 +5,6 @@ tags:
   - Image_Acquisition
   - Digital_Image_Formation
 ---
-
-# Image Acquisition and Digital Image Formation
----
-## Course Navigation
-➡️ **Next Module**: [[color-spaces-and-perception]]
-
----
-
-## Complete Image Acquisition Pipeline
-
-The transition from a continuous three-dimensional physical scene to a discrete matrix of pixels stored in computer memory follows a multi-stage physical and digital transformations pipeline:
-
-```mermaid
-flowchart TD
-    A["Light Source E(x,y,z,λ)"] -->|Incidental Illumination| B["Surface Reflectance r(x,y,z,λ)"]
-    B -->|Reflected Light c = E × r| C["Optical Lens System"]
-    C -->|3D to 2D Projection| D["Sensor Plane Distribution c_p(x',y',λ)"]
-    D -->|Sensor Spectral Sensitivity V(λ)| E["Continuous Image Function f_c(x',y')"]
-    E -->|Spatial Sampling with comb\(x',y'\)| F["Discrete Grid (Pixels) f(i,j)"]
-    F -->|Intensity Quantization| G["Digital Image Matrix f_hat(i,j)"]
-```
-
-The captured visual data serves as the foundational input for subsequent computer vision tasks, such as [[spatial-filtering-and-convolution]], [[edge-detection-techniques]], and [[image-segmentation]].
-
----
-
 ## Physics and Photometry of Image Formation
 
 A digital image measures the radiant energy emitted or reflected by objects in a 3D environment and focused by optical elements onto a two-dimensional sensor plane.
