@@ -2,9 +2,9 @@
 course: Distributed Systems (DSYS)
 tags:
   - consensus
+  - Consistency
 date: 2026-09-26
 ---
-
 ## 1. Architectural Comparison: Client-Server vs. Distributed Systems
 
 ### Centralized Architecture (Client-Server)
@@ -185,9 +185,8 @@ flowchart LR
 > - **Takeaway:** A naive global state captured without causal consistency reflects a configuration that the system may never have occupied. This establishes the need for coordinated distributed snapshot algorithms (e.g., Chandy-Lamport).
 
 ---
-
 ## References & Next Steps
 
 - [[Chandy-Lamport-Algorithm]] — Distributed snapshot algorithm for consistent global cuts
-- [[Lamport-Logical-Clocks]] — Logical time and partial ordering of events in asynchronous systems
+- [[Lecture 02 - Consistency in Cuts & Lamport Clock#|Lamport-Logical-Clocks]] — Logical time and partial ordering of events in asynchronous systems
 - [[Paxos-and-Raft]] — Practical consensus protocols that bypass FLP by relaxing strict liveness guarantees during network instability
