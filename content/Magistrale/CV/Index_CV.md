@@ -22,7 +22,7 @@ SORT date ASC
 
 # Scadenze
 
-- [ ]
+- [ ] Do Slide :3 notes
 - [ ]
 - [ ]
 

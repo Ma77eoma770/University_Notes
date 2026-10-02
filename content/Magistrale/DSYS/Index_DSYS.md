@@ -21,7 +21,8 @@ SORT date ASC
 
 # Scadenze
 
-- [ ]
+- [ ] Finish notes on tablet and do the obsidian version
+- [ ] Do the exercises
 - [ ]
 - [ ]
 

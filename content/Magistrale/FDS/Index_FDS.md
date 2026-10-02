@@ -28,5 +28,6 @@ SORT date ASC
 - [ ] ⏳ 2026-10-23 2026-11-09 Challenge
 - [ ] ⏳ 2026-11-09 2026-12-15 Final Project
 - [ ] ⏳ 2026-12-23 Finale Report & Code
+- [ ] Well study algebra to tackle first slides with the site from the lecture and do a summary of the algebra that is needed with youtube tutorials also
 - [ ]
 - [ ]
